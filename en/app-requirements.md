@@ -79,7 +79,7 @@ nav_order: 5
    ```
 
    </div>
-   <div class="variant" data-variant="appended" data-label="Appended user agent" markdown="1">
+   <div class="variant" data-variant="appended" data-label="Appended user agent" data-confirm="The appended user agent is only needed if your order requirements specify it. If you are not sure which version you need, check with your manager." markdown="1">
 
    - must not indicate that a WebView is used
    - must reflect up-to-date device information

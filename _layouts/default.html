@@ -53,7 +53,7 @@
   <div class="layout">
     <aside class="sidebar">{% include sidebar.html %}</aside>
     <div class="scrim"></div>
-    <main class="content" data-copy="{{ t.copy }}" data-copied="{{ t.copied }}">
+    <main class="content" data-copy="{{ t.copy }}" data-copied="{{ t.copied }}" data-confirm-yes="{{ t.confirm_yes }}" data-confirm-no="{{ t.confirm_no }}">
       {{ content }}
     </main>
     <nav class="toc" aria-label="{{ t.on_page }}"><h4>{{ t.on_page }}</h4><ul></ul></nav>

@@ -79,7 +79,7 @@ nav_order: 5
    ```
 
    </div>
-   <div class="variant" data-variant="appended" data-label="Дополненный user agent" markdown="1">
+   <div class="variant" data-variant="appended" data-label="Дополненный user agent" data-confirm="Дополненный user agent нужен, только если он указан в требованиях вашего заказа. Если вы не уверены, какой вариант нужен, уточните у менеджера." markdown="1">
 
    - не должен указывать на использование вебвью
    - должен отражать актуальную информацию об устройстве

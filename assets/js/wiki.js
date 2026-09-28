@@ -81,6 +81,24 @@
     toc.hidden = true;
   }
 
+  // Inline confirmation shown under a variant selector
+  var openBox = null;
+  function closeConfirm() { if (openBox) { openBox.hidden = true; openBox.innerHTML = ""; openBox = null; } }
+  function askConfirm(text, btn, onYes) {
+    closeConfirm();
+    var box = btn.parentNode._confirm;
+    box.innerHTML = '<p></p><div class="variant-confirm-actions"><button type="button" class="yes"></button><button type="button" class="no"></button></div>';
+    box.querySelector("p").textContent = text;
+    var yes = box.querySelector(".yes"), no = box.querySelector(".no");
+    yes.textContent = main.dataset.confirmYes || "Yes";
+    no.textContent = main.dataset.confirmNo || "Cancel";
+    yes.addEventListener("click", function () { closeConfirm(); onYes(); });
+    no.addEventListener("click", function () { closeConfirm(); btn.parentNode.querySelector('[aria-pressed="true"]').focus(); });
+    box.addEventListener("keydown", function (e) { if (e.key === "Escape") no.click(); });
+    box.hidden = false; openBox = box;
+    no.focus();
+  }
+
   // Variant selector above the first variant block of each group
   var seen = [];
   doc.querySelectorAll(".variant").forEach(function (v) {
@@ -96,10 +114,20 @@
       b.type = "button"; b.dataset.variant = g.dataset.variant;
       b.textContent = g.dataset.label || g.dataset.variant;
       b.setAttribute("aria-pressed", g.dataset.variant === root.dataset.ua);
-      b.addEventListener("click", function () { setVariant(g.dataset.variant); });
+      b.addEventListener("click", function () {
+        if (g.dataset.variant === root.dataset.ua) return;
+        // Variants marked data-confirm ask before switching (e.g. the appended user agent)
+        if (g.dataset.confirm) askConfirm(g.dataset.confirm, b, function () { setVariant(g.dataset.variant); });
+        else { closeConfirm(); setVariant(g.dataset.variant); }
+      });
       sw.appendChild(b);
     });
     parent.insertBefore(sw, group[0]);
+    var box = document.createElement("div");
+    box.className = "variant-confirm"; box.hidden = true;
+    box.setAttribute("role", "alertdialog"); box.setAttribute("aria-live", "assertive");
+    parent.insertBefore(box, group[0]);
+    sw._confirm = box;
   });
 
   // Copy buttons on code blocks
