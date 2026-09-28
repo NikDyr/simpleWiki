@@ -1,0 +1,18 @@
+en:
+  name: English
+  home: Home
+  pages: Pages
+  search: Search…
+  no_results: Nothing found
+  edit: Edit this page
+  updated: Last updated
+  not_translated: This page is not yet translated.
+ru:
+  name: Русский
+  home: Главная
+  pages: Страницы
+  search: Поиск…
+  no_results: Ничего не найдено
+  edit: Редактировать страницу
+  updated: Обновлено
+  not_translated: Эта страница ещё не переведена.

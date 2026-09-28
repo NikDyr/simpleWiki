@@ -1,0 +1,9 @@
+<h3>{{ t.pages }}</h3>
+<ul>
+{%- assign list = site.pages | where: "lang", lang | sort: "nav_order" -%}
+{%- for p in list -%}
+  {%- if p.title and p.nav_exclude != true -%}
+  <li><a href="{{ p.url | relative_url }}"{% if p.url == page.url %} class="active"{% endif %}>{{ p.title }}</a></li>
+  {%- endif -%}
+{%- endfor -%}
+</ul>

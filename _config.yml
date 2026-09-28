@@ -1,0 +1,26 @@
+title: Требования к приложениям
+description: A multilingual wiki powered by GitHub Pages
+# If the site is served from https://<user>.github.io/<repo>/, set baseurl to "/<repo>"
+baseurl: ""
+url: ""
+
+# Languages: first one is the default. Add a code here, a block in _data/i18n.yml,
+# a folder with pages, and a defaults entry below.
+languages: [ru, en]
+default_lang: ru
+
+markdown: kramdown
+kramdown:
+  input: GFM
+plugins:
+  - jekyll-seo-tag
+
+exclude: [readme, README.md, Gemfile, Gemfile.lock]
+
+defaults:
+  - scope: { path: "" }
+    values: { layout: page }
+  - scope: { path: "en" }
+    values: { lang: en }
+  - scope: { path: "ru" }
+    values: { lang: ru }

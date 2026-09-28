@@ -1,0 +1,30 @@
+:root { --bg:#fff; --fg:#1f2328; --muted:#656d76; --line:#d0d7de; --accent:#0969da; --side:#f6f8fa; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0d1117; --fg:#e6edf3; --muted:#8d96a0; --line:#30363d; --accent:#4493f8; --side:#161b22; }
+}
+* { box-sizing: border-box; }
+body { margin:0; font:16px/1.6 -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--fg); }
+a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+.topbar { display:flex; gap:1rem; align-items:center; padding:.6rem 1rem; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); }
+.brand { font-weight:700; color:var(--fg); }
+#search { flex:1; max-width:24rem; padding:.35rem .6rem; border:1px solid var(--line); border-radius:6px; background:var(--side); color:var(--fg); }
+.langs { margin-left:auto; display:flex; gap:.25rem; }
+.langs a { padding:.15rem .5rem; border-radius:4px; font-size:.85rem; }
+.langs a.active { background:var(--accent); color:#fff; }
+.wrap { display:flex; max-width:72rem; margin:0 auto; }
+.sidebar { width:15rem; flex-shrink:0; padding:1rem; border-right:1px solid var(--line); background:var(--side); min-height:calc(100vh - 3rem); }
+.sidebar h3 { margin:0 0 .5rem; font-size:.8rem; text-transform:uppercase; color:var(--muted); }
+.sidebar ul { list-style:none; margin:0; padding:0; }
+.sidebar a { display:block; padding:.2rem .4rem; border-radius:4px; color:var(--fg); }
+.sidebar a.active { background:var(--line); font-weight:600; }
+main { flex:1; min-width:0; padding:1.5rem 2rem; }
+#results { list-style:none; padding:0; margin:0 0 1.5rem; border:1px solid var(--line); border-radius:6px; }
+#results li { padding:.5rem .8rem; border-bottom:1px solid var(--line); } #results li:last-child { border:0; }
+#results small { display:block; color:var(--muted); }
+pre, code { background:var(--side); border-radius:4px; } pre { padding:.8rem; overflow-x:auto; } code { padding:.1rem .3rem; }
+table { border-collapse:collapse; } td, th { border:1px solid var(--line); padding:.3rem .6rem; }
+.meta { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.9rem; }
+@media (max-width: 720px) {
+  .wrap { flex-direction:column; } .sidebar { width:auto; min-height:0; border-right:0; border-bottom:1px solid var(--line); }
+  main { padding:1rem; } #search { max-width:none; }
+}

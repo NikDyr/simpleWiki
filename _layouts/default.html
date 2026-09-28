@@ -1,0 +1,31 @@
+{%- assign lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% seo %}
+  {%- assign siblings = site.pages | where: "ref", page.ref -%}
+  {%- if page.ref -%}{%- for p in siblings -%}
+  <link rel="alternate" hreflang="{{ p.lang }}" href="{{ p.url | absolute_url }}">
+  {%- endfor -%}{%- endif %}
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ '/' | append: lang | append: '/' | relative_url }}">{{ site.title }}</a>
+    <input id="search" type="search" placeholder="{{ t.search }}" autocomplete="off"
+           data-index="{{ '/search.json' | relative_url }}" data-lang="{{ lang }}" data-empty="{{ t.no_results }}">
+    {% include lang-switcher.html %}
+  </header>
+  <div class="wrap">
+    <nav class="sidebar">{% include sidebar.html %}</nav>
+    <main>
+      <ul id="results" hidden></ul>
+      {{ content }}
+    </main>
+  </div>
+  <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+</body>
+</html>

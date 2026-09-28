@@ -1,0 +1,11 @@
+---
+layout: null
+---
+[
+{%- assign first = true -%}
+{%- for p in site.pages -%}{%- if p.lang and p.title -%}
+{%- unless first %},{% endunless -%}{%- assign first = false %}
+  {"title": {{ p.title | jsonify }}, "lang": {{ p.lang | jsonify }}, "url": {{ p.url | relative_url | jsonify }},
+   "text": {{ p.content | markdownify | strip_html | normalize_whitespace | truncate: 3000 | jsonify }}}
+{%- endif -%}{%- endfor %}
+]
