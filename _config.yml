@@ -1,8 +1,8 @@
 title: Требования к приложениям
 description: A multilingual wiki powered by GitHub Pages
 # If the site is served from https://<user>.github.io/<repo>/, set baseurl to "/<repo>"
-baseurl: ""
-url: ""
+baseurl: "/simpleWiki"
+url: "https://nikdyr.github.io"
 
 # Languages: first one is the default. Add a code here, a block in _data/i18n.yml,
 # a folder with pages, and a defaults entry below.
