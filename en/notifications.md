@@ -29,6 +29,9 @@ If, according to the [user flow]({{ '/en/user-flow/' | relative_url }}), the **W
 - **"Yes, I Want Bonuses!"** — requests the system notification permission, then proceeds to the WebView
 - "Skip" — proceeds to the WebView without asking
 
+> A refusal in the system prompt is a complete refusal: the custom screen is no longer shown.
+{: .callout .note}
+
 ---
 
 To support notifications on Android 13 and above (API level 33+), you must request the notification permission: add the corresponding permission to the manifest and call the method that requests it.

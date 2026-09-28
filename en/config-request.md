@@ -58,7 +58,7 @@ curl --request POST \
 	"bundle_id": "com.example.app", // must be added on the app side
 	"os": "Android", // must be added on the app side
 	"store_id": "com.example.app", // must be added on the app side
-	"locale": "En", // must be added on the app side 
+	"locale": "en", // must be added on the app side 
 	"push_token": "dl28EJCAT4a7UNl86egX-U:APA91bEC1a5aGJL8ZyQHlm-B9togw60MLWP4_zU0ExSXLSa_HiL82Iurj0d-1zJmkMdUcvgCRXTrXtbWQHxmJh49BibLiqZVXPNyrCdZW-_ROTt98f0WCLtt531RYPhWSDOkykcaykE3",
 	"firebase_project_id": "8934278530" // must be added on the app side
 }
@@ -91,7 +91,10 @@ Failed request:
 }
 ```
 
-> An error returned by the endpoint **counts as a negative response** when [deciding]({{ '/en/user-flow/' | relative_url }}) whether to launch the WebView.
+> A **positive response** is a response with code 200 that contains a `url`. Any other response, including a network error or exceeding the wait limit, **counts as a negative response** when [deciding]({{ '/en/user-flow/' | relative_url }}) whether to launch the WebView.
+{: .callout .warn}
+
+> The overall wait limit for the AppsFlyer data and the endpoint response is **15 seconds**. If no positive response is received within this time, the response counts as negative: on first launch, the stub is opened.
 {: .callout .warn}
 
 |  | Type | Description |
@@ -142,7 +145,9 @@ The config request **uses all parameters available in the conversion data**, unc
 
 1. `push_token` contains the current Firebase Messaging registration token. [More about setting up Firebase Messaging and getting the token](https://firebase.google.com/docs/cloud-messaging).
 
-   > When the token is refreshed, it must be sent immediately in a new request.
+   > When the token is refreshed, it must be sent immediately in a new request. If the response contains a new link, the saved `url` and `expires` are replaced with the new values.
+   >
+   > In stub mode, token refreshes are not handled — no config requests are made.
    {: .callout .note}
 
 1. `firebase_project_id` contains the Firebase `Project number` or `Project ID`.
@@ -185,12 +190,12 @@ If deep linking data was received from AppsFlyer, include it in the request para
 
 ---
 
-If the request succeeds, save the `url` and `expires` values and open the link in the WebView unchanged.
+On a positive response, save the `url` and `expires` values and open the link in the WebView unchanged. If `expires` is missing from the response, save the device's current time instead.
 
-On subsequent launches, compare `expires` with the device's current time. When the link expires, make a new request and receive and save the new values.
+On subsequent launches, compare `expires` with the device's current time. If the link has expired, make a new request and, on a positive response, save the new values.
 
-If the request fails (response code other than 200) but a `url` was received earlier and is currently saved on the device, open the saved link in the WebView.
+If the new request returns a negative response but a `url` was received earlier and is currently saved on the device, open the saved link in the WebView.
 
-### Behaviour on a failed request
+### Behaviour on a negative response
 
-If the request fails and no `url` has been received before, launch the game and make no further config requests within this install, unless different logic has been agreed for this app.
+On a negative response, if no `url` has been received before, launch the game and make no further config requests within this install, unless different logic has been agreed for this app.

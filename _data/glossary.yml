@@ -1,4 +1,5 @@
 # Glossary shown as popups over terms in the page text (first mention per page).
+# Summaries are definitions only — no instructions or calls to action.
 # match: regular expressions (case-insensitive, whole words); \p{L}* lets Russian word endings vary.
 # code:  exact inline-code values (e.g. `url`) that get the same popup.
 # ref:   page the "→" link points to (+ optional anchor).
@@ -6,23 +7,23 @@
 ru:
   - term: Первый запуск
     match: ['перв\p{L}* запуск\p{L}*']
-    summary: Запуск, требующий интернета. Приложение отправляет запрос к конфигу и по ответу выбирает режим — WebView или фантик.
+    summary: Первый запуск приложения после установки, на котором по ответу конфига определяется режим работы — WebView или фантик.
     ref: user-flow
   - term: Режим WebView
     match: ['режим\p{L}* WebView']
-    summary: Приложение показывает сайт по ссылке из конфига. Устанавливается при положительном ответе и сохраняется для всех последующих запусков.
+    summary: Режим работы, в котором приложение показывает сайт по ссылке из конфига. Устанавливается по положительному ответу на первом запуске.
     ref: user-flow
   - term: Фантик
     match: ['фантик\p{L}*']
-    summary: Собственный контент приложения (игра или другой контент). Показывается при отрицательном ответе конфига; дальше открывается всегда и работает без интернета.
+    summary: Режим работы с собственным контентом приложения (игра или другой контент). Устанавливается по отрицательному ответу на первом запуске и не зависит от наличия сети.
     ref: user-flow
   - term: Заглушка «Нет интернета»
     match: ['заглушк\p{L}*']
-    summary: Экран, который видит пользователь без соединения при первом запуске или в режиме WebView. Может содержать кнопку Retry.
+    summary: Экран, отображаемый при отсутствии соединения на первом запуске или в режиме WebView.
     ref: user-flow
   - term: Экран загрузки
     match: ['экран\p{L}* загрузки']
-    summary: В стиле приложения, с анимированным индикатором, адаптируется к ориентации. Загрузка — не дольше 10 секунд.
+    summary: Экран, отображаемый во время загрузки приложения, с анимированным индикатором загрузки.
     ref: app-requirements
   - term: Запрос к конфигу
     match: ['запрос\p{L}* к конфигу']
@@ -30,113 +31,113 @@ ru:
     ref: config-request
   - term: Конфиг
     match: ['конфиг\p{L}*']
-    summary: Серверная логика приложения — регистрирует пользователя в системе уведомлений и выдаёт актуальную ссылку для WebView.
+    summary: Серверная логика приложения — авторизация пользователя в системе уведомлений и выдача актуальной ссылки для WebView.
     ref: config-request
   - term: Эндпоинт
     match: ['эндпоинт\p{L}*']
-    summary: Адрес конфига для POST-запроса. Предоставляется менеджером по бандлу, Apple ID и названию приложения.
+    summary: Адрес конфига, на который отправляется запрос.
     ref: config-request
   - term: Положительный / отрицательный ответ
     match: ['положительн\p{L}* ответ\p{L}*', 'отрицательн\p{L}* ответ\p{L}*']
-    summary: 'Положительный — `200` и `"ok": true` со ссылкой `url`. Отрицательный — любая ошибка; означает запуск фантика.'
+    summary: 'Положительный — ответ конфига с кодом `200`, содержащий `url`. Отрицательный — любой другой ответ, включая ошибку сети и превышение лимита ожидания.'
     ref: config-request
   - term: url
     code: [url]
-    summary: Актуальная ссылка из ответа конфига. Сохраняется и открывается в WebView без изменений; при ошибке запроса — последняя сохранённая.
+    summary: Актуальная ссылка для WebView из ответа конфига.
     ref: config-request
   - term: expires
     code: [expires]
-    summary: Время окончания действия ссылки. Сверяется с временем устройства; по истечении нужен новый запрос.
+    summary: Время окончания срока действия ссылки из ответа конфига.
     ref: config-request
   - term: Данные конверсии
     match: ['данн\p{L}* конверсии']
-    summary: Параметры источника установки из колбека AppsFlyer. Передаются в конфиг целиком и без изменений.
+    summary: Параметры источника установки, которые AppsFlyer SDK возвращает в колбеке.
     ref: config-request
   - term: Органическая / неорганическая установка
     match: ['неорганическ\p{L}*', 'органическ\p{L}*']
-    summary: 'Определяется полем `af_status`. Для тестов ссылку можно получить только при `"af_status": "Non-organic"`.'
+    summary: 'Тип установки по полю `af_status`: органическая — без рекламного источника, неорганическая (`Non-organic`) — по рекламному переходу.'
     ref: config-request
   - term: AppsFlyer
     match: ['AppsFlyer']
-    summary: Сервис атрибуции установок; его SDK обязателен. Новые приложения заводятся с Timezone Moscow (UTC + 3) и Currency USD.
+    summary: Сервис атрибуции мобильных установок.
     ref: config-request
   - term: af_id (AppsFlyer ID)
     code: [af_id]
-    summary: Идентификатор, генерируемый при инициализации AppsFlyer SDK (getAppsFlyerUID / getAppsFlyerId). В редакторе Unity — пустая строка.
+    summary: Идентификатор установки, генерируемый AppsFlyer SDK при инициализации.
     ref: config-request
   - term: Трекинговая ссылка
     match: ['трекингов\p{L}* ссылк\p{L}*']
-    summary: 'Ссылка AppsFlyer, по которой переходят перед тестовой установкой, дополнив её `&advertising_id={GAID/IDFA}`.'
+    summary: Ссылка AppsFlyer, фиксирующая переход пользователя для атрибуции установки.
     ref: app-requirements
   - term: GAID / IDFA
     match: ['GAID', 'IDFA', 'Test Devices']
-    summary: Рекламные идентификаторы устройства Android / iOS. У тестового устройства должен быть в списке Test Devices аккаунта AppsFlyer.
+    summary: 'Рекламные идентификаторы устройства: GAID — Android, IDFA — iOS. Test Devices — список тестовых устройств в аккаунте AppsFlyer.'
     ref: app-requirements
   - term: OneLink
     match: ['OneLink']
-    summary: Ссылка AppsFlyer для проверки deep linking. Создаётся в выделенном аккаунте; для неорганической установки дополняется `is_retargeting=true`.
+    summary: Тип ссылок AppsFlyer с поддержкой deep linking, работающий на разных платформах.
     ref: onelink
   - term: Unified Deep Linking (UDL)
     match: ['Unified Deep Linking', 'UDL', 'deep linking']
-    summary: 'Механизм AppsFlyer, передающий данные ссылки (`deep_link_value` и др.). Добавляются в запрос к конфигу; при совпадении ключей с данными конверсии берутся первые полученные.'
+    summary: 'Механизм AppsFlyer, передающий в приложение данные ссылки, по которой оно было установлено или открыто (`deep_link_value` и др.).'
     ref: config-request
   - term: bundle_id
     code: [bundle_id]
-    summary: 'Bundle ID (iOS) или Package Name (Android), например `com.example.app`.'
+    summary: 'Идентификатор приложения: Bundle ID (iOS) или Package Name (Android), например `com.example.app`.'
     ref: config-request
   - term: store_id
     code: [store_id]
-    summary: 'ID в сторе. Для iOS — с префиксом `id`, для Android совпадает с `bundle_id`.'
+    summary: 'Идентификатор приложения в сторе. Для iOS — Apple ID с префиксом `id`, для Android совпадает с `bundle_id`.'
     ref: config-request
   - term: locale
     code: [locale]
-    summary: 'Основная локализация устройства: RFC 3066 (`ru`, `en_US`) или название языка.'
+    summary: Основная локализация устройства пользователя.
     ref: config-request
   - term: Firebase Cloud Messaging (FCM)
     match: ['Firebase Cloud Messaging', 'Firebase Messaging', 'FCM']
-    summary: Сервис push-уведомлений. Проект Firebase нельзя менять без согласования с менеджером — это сломает пуши.
+    summary: Сервис Google для доставки push-уведомлений.
     ref: notifications
   - term: push_token
     code: [push_token]
-    summary: Токен регистрации Firebase Messaging. При обновлении сразу передаётся в новом запросе к конфигу.
+    summary: Токен регистрации устройства в Firebase Messaging.
     ref: config-request
   - term: firebase_project_id
     code: [firebase_project_id]
-    summary: Project number или Project ID Firebase. Если Firebase не инициализирован, поля Firebase пропускаются.
+    summary: 'Идентификатор проекта Firebase: Project number или Project ID.'
     ref: config-request
   - term: Сервисный аккаунт
     match: ['сервисн\p{L}* аккаунт\p{L}*']
-    summary: 'Аккаунт Google Cloud с ролью `Basic → Owner` в проекте Firebase. Нужны два: `marla-export@…` и `iosandroidpushes@…`.'
+    summary: 'Аккаунт Google Cloud, через который внешний сервис получает доступ к проекту Firebase. Для уведомлений используются `marla-export@…` и `iosandroidpushes@…`.'
     ref: notifications
   - term: Кастомный экран запроса уведомлений
     match: ['кастомн\p{L}* экран\p{L}*']
-    summary: Экран перед системным запросом разрешения в режиме WebView. После отказа показывается снова через 3 дня.
+    summary: Собственный экран приложения с предложением получать уведомления, предшествующий системному запросу разрешения.
     ref: notifications
   - term: Payload уведомления
     match: ['payload']
     code: [payload]
-    summary: 'Данные push-уведомления. Непустой `url` в `data` открывается в WebView по нажатию — один раз, без сохранения.'
+    summary: 'Содержимое push-уведомления; в поле `data` может передаваться ссылка `url`.'
     ref: notifications
   - term: User agent
     match: ['user agent', 'юзерагент\p{L}*']
-    summary: Строка, которой WebView представляется сайтам. Не должна выдавать WebView и должна отражать актуальные данные устройства.
+    summary: Строка, которой WebView представляется сайтам, — сведения о браузере, операционной системе и устройстве.
     ref: app-requirements
     anchor: user-agent
   - term: Safe Area
     match: ['Safe Area']
-    summary: Область экрана, где контент не перекрывается рамками и камерой. WebView должен помещаться в неё при любой ориентации.
+    summary: Область экрана, в которой контент не перекрывается рамками, камерой и системными элементами.
     ref: app-requirements
   - term: ERR_TOO_MANY_REDIRECTS
     code: [ERR_TOO_MANY_REDIRECTS]
-    summary: Ошибка при большом числе редиректов. Приложение должно продолжить загрузку по последнему адресу.
+    summary: Ошибка загрузки страницы при превышении допустимого числа редиректов.
     ref: app-requirements
   - term: Protected Media ID
     match: ['Protected Media ID']
-    summary: Доступ к защищённому медиаконтенту на странице. WebView должен подтверждать его автоматически.
+    summary: Разрешение, запрашиваемое страницей для воспроизведения защищённого медиаконтента.
     ref: app-requirements
   - term: Диплинк
     match: ['диплинк\p{L}*']
-    summary: Ссылка в WebView, открывающая другое приложение. Если WebView её не поддерживает — передать системе и вернуть пользователя на прошлую страницу.
+    summary: Ссылка, открывающая другое приложение или определённый экран в нём.
     ref: app-requirements
   - term: Тестовый оффер
     match: ['тестов\p{L}* оффер\p{L}*']
@@ -144,33 +145,33 @@ ru:
     ref: app-requirements
   - term: Адаптивная иконка
     match: ['адаптивн\p{L}* иконк\p{L}*']
-    summary: Изображение точно вписано в форму иконки — без полей и обрезанного контента.
+    summary: Иконка приложения, изображение которой точно вписано в её форму — без полей и без обрезанного контента.
     ref: app-requirements
   - term: 16 KB page sizes
     match: ['16 KB page sizes', '16 ?КБ']
-    summary: Требование Google Play с 1 ноября 2025 г. для приложений под Android 15+. В Unity — начиная с 6000.0.38f1 / 2022.3.56f1 / 2021.3.48f1.
+    summary: Размер страницы памяти 16 КБ, поддержка которого требуется Google Play с 1 ноября 2025 г. для приложений под Android 15+.
     ref: changelog/android-requirements
 
 en:
   - term: First launch
     match: ['first launch']
-    summary: The launch that requires internet. The app sends the config request and picks a mode from the response — WebView or stub.
+    summary: The first launch of the app after install, on which the config response determines the mode — WebView or stub.
     ref: user-flow
   - term: WebView mode
     match: ['WebView mode']
-    summary: The app shows a website from the config link. Set on a positive response and kept for all subsequent launches.
+    summary: The mode in which the app shows a website from the config link. Set by a positive response on first launch.
     ref: user-flow
   - term: Stub
     match: ['stubs?']
-    summary: The app's own content (a game or other content). Shown on a negative config response; after that it always opens and works offline.
+    summary: The mode with the app's own content (a game or other content). Set by a negative response on first launch; does not depend on the network.
     ref: user-flow
   - term: '"No internet" placeholder'
     match: ['placeholder']
-    summary: The screen shown without a connection on first launch or in WebView mode. May include a Retry button.
+    summary: The screen shown when there is no connection on first launch or in WebView mode.
     ref: user-flow
   - term: Loading screen
     match: ['loading screens?']
-    summary: In the app's style, with an animated indicator, adapting to orientation. Loading takes no longer than 10 seconds.
+    summary: The screen shown while the app is loading, with an animated loading indicator.
     ref: app-requirements
   - term: Config request
     match: ['config requests?']
@@ -178,113 +179,113 @@ en:
     ref: config-request
   - term: Config
     match: ['config']
-    summary: The server-side app logic — registers the user for notifications and provides the current WebView link.
+    summary: The server-side app logic — registering the user in the notification system and providing the current WebView link.
     ref: config-request
   - term: Endpoint
     match: ['endpoints?']
-    summary: The config address for the POST request. Provided by the manager based on the bundle, Apple ID and app name.
+    summary: The config address the request is sent to.
     ref: config-request
   - term: Positive / negative response
     match: ['positive response', 'negative response']
-    summary: 'Positive — `200` and `"ok": true` with a `url`. Negative — any error; means the stub is launched.'
+    summary: 'Positive — a config response with code `200` that contains a `url`. Negative — any other response, including a network error or exceeding the wait limit.'
     ref: config-request
   - term: url
     code: [url]
-    summary: The current link from the config response. Saved and opened in the WebView unchanged; if a request fails, the last saved one is used.
+    summary: The current WebView link from the config response.
     ref: config-request
   - term: expires
     code: [expires]
-    summary: The link expiry time. Compared with the device time; once expired, make a new request.
+    summary: The expiry time of the link from the config response.
     ref: config-request
   - term: Conversion data
     match: ['conversion data']
-    summary: Install source parameters from the AppsFlyer callback. Sent to the config in full and unchanged.
+    summary: Install source parameters returned by the AppsFlyer SDK in a callback.
     ref: config-request
   - term: Organic / non-organic install
     match: ['non-organic', 'organic']
-    summary: 'Determined by `af_status`. For testing, a link can only be obtained with `"af_status": "Non-organic"`.'
+    summary: 'The install type given by `af_status`: organic — without an ad source, non-organic (`Non-organic`) — via an ad click.'
     ref: config-request
   - term: AppsFlyer
     match: ['AppsFlyer']
-    summary: An install attribution service; its SDK is required. New apps are created with Timezone Moscow (UTC + 3) and Currency USD.
+    summary: A mobile install attribution service.
     ref: config-request
   - term: af_id (AppsFlyer ID)
     code: [af_id]
-    summary: Generated when the AppsFlyer SDK is initialized (getAppsFlyerUID / getAppsFlyerId). Empty in the Unity editor.
+    summary: The install identifier generated by the AppsFlyer SDK on initialization.
     ref: config-request
   - term: Tracking link
     match: ['tracking links?']
-    summary: 'An AppsFlyer link opened right before a test install, with `&advertising_id={GAID/IDFA}` appended.'
+    summary: An AppsFlyer link that records the user's click for install attribution.
     ref: app-requirements
   - term: GAID / IDFA
     match: ['GAID', 'IDFA', 'Test Devices']
-    summary: Android / iOS advertising identifiers. The test device's ID must be in the AppsFlyer account's Test Devices list.
+    summary: 'Device advertising identifiers: GAID — Android, IDFA — iOS. Test Devices — the list of test devices in the AppsFlyer account.'
     ref: app-requirements
   - term: OneLink
     match: ['OneLink']
-    summary: An AppsFlyer link for testing deep linking. Created in the dedicated account; append `is_retargeting=true` for a non-organic install.
+    summary: A cross-platform AppsFlyer link type with deep linking support.
     ref: onelink
   - term: Unified Deep Linking (UDL)
     match: ['Unified Deep Linking', 'UDL', 'deep linking']
-    summary: 'The AppsFlyer mechanism that passes link data (`deep_link_value`, etc.). Added to the config request; on key overlap with conversion data, the first received is used.'
+    summary: 'The AppsFlyer mechanism that passes the app the data of the link it was installed or opened from (`deep_link_value`, etc.).'
     ref: config-request
   - term: bundle_id
     code: [bundle_id]
-    summary: 'Bundle ID (iOS) or Package Name (Android), e.g. `com.example.app`.'
+    summary: 'The app identifier: Bundle ID (iOS) or Package Name (Android), e.g. `com.example.app`.'
     ref: config-request
   - term: store_id
     code: [store_id]
-    summary: 'Store ID. For iOS — prefixed with `id`; for Android — the same as `bundle_id`.'
+    summary: 'The app identifier in the store. For iOS — the Apple ID prefixed with `id`; for Android — the same as `bundle_id`.'
     ref: config-request
   - term: locale
     code: [locale]
-    summary: 'The device''s primary locale: RFC 3066 (`ru`, `en_US`) or a language name.'
+    summary: The primary locale of the user's device.
     ref: config-request
   - term: Firebase Cloud Messaging (FCM)
     match: ['Firebase Cloud Messaging', 'Firebase Messaging', 'FCM']
-    summary: The push notification service. Do not change the Firebase project without the manager's approval — it will break pushes.
+    summary: Google's push notification delivery service.
     ref: notifications
   - term: push_token
     code: [push_token]
-    summary: The Firebase Messaging registration token. When refreshed, send it immediately in a new config request.
+    summary: The device's Firebase Messaging registration token.
     ref: config-request
   - term: firebase_project_id
     code: [firebase_project_id]
-    summary: The Firebase Project number or Project ID. If Firebase is not initialized, the Firebase fields are omitted.
+    summary: 'The Firebase project identifier: Project number or Project ID.'
     ref: config-request
   - term: Service account
     match: ['service accounts?']
-    summary: 'A Google Cloud account with the `Basic → Owner` role in the Firebase project. Two are required: `marla-export@…` and `iosandroidpushes@…`.'
+    summary: 'A Google Cloud account through which an external service accesses the Firebase project. Notifications use `marla-export@…` and `iosandroidpushes@…`.'
     ref: notifications
   - term: Custom notification prompt screen
     match: ['custom (?:prompt )?screen']
-    summary: Shown before the system permission prompt in WebView mode. After a refusal it is shown again in 3 days.
+    summary: The app's own screen offering notifications, shown before the system permission prompt.
     ref: notifications
   - term: Notification payload
     match: ['payload']
     code: [payload]
-    summary: 'Push notification data. A non-empty `url` in `data` opens in the WebView on tap — once, without saving.'
+    summary: 'The content of a push notification; its `data` field may carry a `url` link.'
     ref: notifications
   - term: User agent
     match: ['user agent']
-    summary: The string the WebView identifies itself with. Must not reveal the WebView and must reflect current device data.
+    summary: The string the WebView identifies itself to websites with — browser, operating system and device details.
     ref: app-requirements
     anchor: user-agent
   - term: Safe Area
     match: ['Safe Area']
-    summary: The screen area not covered by bezels or the camera. The WebView must fit within it in any orientation.
+    summary: The screen area where content is not covered by bezels, the camera or system elements.
     ref: app-requirements
   - term: ERR_TOO_MANY_REDIRECTS
     code: [ERR_TOO_MANY_REDIRECTS]
-    summary: An error caused by many redirects. The app must continue loading at the last address.
+    summary: A page loading error caused by exceeding the allowed number of redirects.
     ref: app-requirements
   - term: Protected Media ID
     match: ['Protected Media ID']
-    summary: Access to protected media on a page. The WebView must grant it automatically.
+    summary: A permission a page requests to play protected media content.
     ref: app-requirements
-  - term: Deep link (to another app)
+  - term: Deep link
     match: ['deep links?(?! data)']
-    summary: A link in the WebView that opens another app. If unsupported, pass it to the system and return the user to the previous page.
+    summary: A link that opens another app or a specific screen in it.
     ref: app-requirements
   - term: Test offer
     match: ['test offer']
@@ -292,9 +293,9 @@ en:
     ref: app-requirements
   - term: Adaptive icon
     match: ['adaptive icons?']
-    summary: The image fits the icon shape exactly — no margins and no cropped content.
+    summary: An app icon whose image fits its shape exactly — no margins and no cropped content.
     ref: app-requirements
   - term: 16 KB page sizes
     match: ['16 KB page sizes']
-    summary: A Google Play requirement from November 1, 2025 for apps targeting Android 15+. In Unity — from 6000.0.38f1 / 2022.3.56f1 / 2021.3.48f1.
+    summary: A 16 KB memory page size, support for which Google Play requires from November 1, 2025 for apps targeting Android 15+.
     ref: changelog/android-requirements

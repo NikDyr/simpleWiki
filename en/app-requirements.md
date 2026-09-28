@@ -28,11 +28,11 @@ nav_order: 5
 
    Besides the scenarios described here and on the resource, check the overall user experience, including WebView smoothness, loading times, image quality, whether the app behaves as users expect, and so on.
 
-1. **The app size must not exceed 100 MB**
+1. **The app size in the store must not exceed 100 MB**
 1. **Store Privacy Policy requirements**  
    The app must provide access to the privacy policy (link/text) as required by the [App Store](https://developer.apple.com/app-store/review/guidelines/#5.1.1) and [Google Play](https://support.google.com/googleplay/android-developer/answer/10144311?hl=en-GB).
 1. **Minimum API requirements**  
-   Minimum system API levels should be as low as the current store policy and the SDKs used allow.
+   System API levels must be the minimum allowed by the store policy on the build date.
    - Android target API level 35 / min API level 30
    - iOS 18
 1. **Adaptive icon**  
@@ -54,12 +54,12 @@ nav_order: 5
    *The custom prompt screen must adapt to portrait and landscape orientation.*  
    Agreeing must lead to the system notification permission prompt.  
    Declining on the custom screen postpones the next display of this screen by 3 days.  
-   Declining in the system prompt makes it impossible to show that prompt again.
+   Declining in the system prompt is a complete refusal: the system prompt cannot be shown again, and the custom screen is no longer shown.
    All three scenarios must be tested:
 
    - agreeing to notifications on first launch
    - agreeing to notifications three days later
-   - declining notifications completely
+   - declining notifications completely (the custom screen is no longer shown)
 
    > **Do not change the Firebase project without the manager's approval** — it will break push notifications.
    {: .callout .danger}
@@ -67,7 +67,8 @@ nav_order: 5
 1. **WebView loading**  
    The WebView must load when certain conditions are met, as described in [User Flow]({{ '/en/user-flow/' | relative_url }}).  
    Test scenario for launching the WebView: `"af_status":"Non-organic"` in the conversion data. All described scenarios must be tested.
-1. <span id="user-agent"></span>**User agent**
+1. <span id="user-agent"></span>**User agent**  
+   *The user agent variant is chosen according to the order requirements.*
    <div class="variant" data-variant="basic" data-label="Basic user agent" markdown="1">
 
    - must not indicate that a WebView is used
@@ -150,7 +151,7 @@ nav_order: 5
 1. **Opening the on-screen keyboard must not cover the active input field**
 1. **The app must be set up to receive notifications**  
    Details: [Notifications Setup]({{ '/en/notifications/' | relative_url }})
-   - The notification must contain an image and a custom icon (Android only)
+   - The notification must contain an image and, on Android, a custom icon
    - Tapping the notification must launch the app and load the WebView with the link from the notification. This link is single-use; it must not be used on the next app launch.
 
    > **Do not change the Firebase project without the manager's approval** — it will break push notifications.
