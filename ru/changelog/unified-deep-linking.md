@@ -4,8 +4,6 @@ ref: "changelog/unified-deep-linking"
 parent: "changelog"
 ---
 
-## Требуется поддержка Unified deep linking на всех платформах
-
 ### Данные deep linking AppsFlyer (UDL) при запросе к конфигу
 
 В случае если удалось получить данные deep linking необходимо включить их в параметры запроса.
@@ -29,15 +27,15 @@ parent: "changelog"
 }
 ```
 
-💡  
-Некоторых полей в теле deep link данных может не быть.  
-Так же некоторые поля совпадают по ключу с параметрами конверсии. В случае совпадения используются первые полученные данные.
+> Некоторых полей в теле deep link данных может не быть.
+>
+> Так же некоторые поля совпадают по ключу с параметрами конверсии. В случае совпадения используются первые полученные данные.
+{: .callout .tip}
 
-Подробнее про deep linking:  
-https://dev.appsflyer.com/hc/docs/dl_android_unified_deep_linking
+*Подробнее про deep linking:*
 
-https://dev.appsflyer.com/hc/docs/dl_ios_unified_deep_linking
+- [Android Unified Deep Linking](https://dev.appsflyer.com/hc/docs/dl_android_unified_deep_linking)
+- [iOS Unified Deep Linking](https://dev.appsflyer.com/hc/docs/dl_ios_unified_deep_linking)
+- [Unified Deep Linking (UDL)](https://dev.appsflyer.com/hc/docs/unifieddeeplink)
 
-https://dev.appsflyer.com/hc/docs/unifieddeeplink
-
-Подробнее в разделе Запрос к конфигу
+Подробнее в разделе [Запрос к конфигу]({{ '/ru/config-request/' | relative_url }}).

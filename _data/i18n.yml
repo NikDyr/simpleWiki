@@ -1,5 +1,6 @@
 en:
   name: English
+  site_title: App Requirements
   home: Home
   pages: Pages
   search: Search…
@@ -14,6 +15,7 @@ en:
   copied: Copied
 ru:
   name: Русский
+  site_title: Требования к приложениям
   home: Главная
   pages: Страницы
   search: Поиск…

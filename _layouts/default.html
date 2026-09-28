@@ -6,7 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>try{var th=localStorage.getItem("theme");if(th)document.documentElement.dataset.theme=th}catch(e){}</script>
-  {% seo %}
+  {% seo title=false %}
+  <title>{% if page.title and page.ref != 'index' %}{{ page.title }} · {% endif %}{{ t.site_title | default: site.title }}</title>
   {%- if page.ref -%}{%- assign siblings = site.pages | where: "ref", page.ref -%}{%- for p in siblings %}
   <link rel="alternate" hreflang="{{ p.lang }}" href="{{ p.url | absolute_url }}">
   {%- endfor -%}{%- endif %}
@@ -23,7 +24,7 @@
     </button>
     <a class="brand" href="{{ '/' | append: lang | append: '/' | relative_url }}">
       <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 7h12M6 12h12M6 17h7"/></svg></span>
-      <span class="brand-name">{{ site.title }}</span>
+      <span class="brand-name">{{ t.site_title | default: site.title }}</span>
     </a>
     <div class="search-wrap">
       <svg class="search-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>

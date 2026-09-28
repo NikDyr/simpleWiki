@@ -1,10 +1,34 @@
 ---
-title: App Requirements
-ref: index
-permalink: /en/
+title: "App Requirements"
+ref: "index"
 nav_order: 1
+permalink: "/en/"
+layout: home
 ---
 
-The English translation is in progress. See the [Russian version]({{ '/ru/' | relative_url }}) for the full documentation.
+Requirements and scenarios for building and testing apps: WebView launch, the config request, push notifications and AppsFlyer integration.
+{: .lead}
 
-To translate a page, copy it from `ru/` to `en/` keeping the same `ref:` value — the language switcher will link them automatically.
+> **Do not change the Firebase project without the manager's approval** — it will break push notifications.
+{: .callout .danger}
+
+<div class="cards">
+  <a class="card" href="{{ '/en/user-flow/' | relative_url }}"><span class="card-n">01</span><strong>User Flow</strong><span>First launch, WebView and "wrapper" modes, behaviour without internet</span></a>
+  <a class="card" href="{{ '/en/config-request/' | relative_url }}"><span class="card-n">02</span><strong>Config Request</strong><span>Request format, AppsFlyer and Firebase data, server response</span></a>
+  <a class="card" href="{{ '/en/notifications/' | relative_url }}"><span class="card-n">03</span><strong>Notifications Setup</strong><span>Permission prompt screen, FCM, notification icon</span></a>
+  <a class="card" href="{{ '/en/app-requirements/' | relative_url }}"><span class="card-n">04</span><strong>App Requirements and Testing</strong><span>Tracking links, deep linking, pre-release checklist</span></a>
+</div>
+
+## Recent changes
+
+> The requirement to append app data to the user agent was removed on 10.06.2026.
+{: .callout .info}
+
+{% assign log = site.pages | where: "parent", "changelog" | where: "lang", page.lang %}
+<ul class="changes">
+{%- for p in log %}
+  <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
+{%- endfor %}
+</ul>
+
+[All changes →]({{ '/en/changelog/' | relative_url }})

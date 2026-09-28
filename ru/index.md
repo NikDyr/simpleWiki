@@ -24,7 +24,7 @@ layout: home
 > Требование дополнять юзерагент данными приложения удалено 10.06.2026
 {: .callout .info}
 
-{% assign log = site.pages | where: "parent", "changelog" %}
+{% assign log = site.pages | where: "parent", "changelog" | where: "lang", page.lang %}
 <ul class="changes">
 {%- for p in log %}
   <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>

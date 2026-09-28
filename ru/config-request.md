@@ -91,7 +91,7 @@ Status: 200 (OK)
 }
 ```
 
-> Ошибка полученная при запросе к эндпоинту **является отрицательным ответом** для [принятия решения](/1afe1469e68a805bb627fc29467dea52?pvs=25) о запуске WebView.
+> Ошибка полученная при запросе к эндпоинту **является отрицательным ответом** для [принятия решения]({{ '/ru/user-flow/' | relative_url }}) о запуске WebView.
 {: .callout .warn}
 
 |  | Тип | Описание |
@@ -125,15 +125,14 @@ Status: 200 (OK)
 
 ### Параметры приложения
 
-1. `af_id` cодержит значение Appsflyer ID, который генерируется автоматически при инициализации Appsflyer SDK и доступен как ответ метода getAppsFlyerUID или getAppsFlyerId в зависимости от платформы разработки.
+1. `af_id` содержит значение Appsflyer ID, который генерируется автоматически при инициализации Appsflyer SDK и доступен как ответ метода getAppsFlyerUID или getAppsFlyerId в зависимости от платформы разработки.
 
-   > ⚠️
-   >
-   > В редакторе Unity getAppsFlyerId будет возвращать пустую строку
+   > В редакторе Unity getAppsFlyerId будет возвращать пустую строку.
+   {: .callout .warn}
 
 1. `bundle_id` содержит значение Bundle ID (`com.example.app`) или Package Name приложения.
 1. `os` содержит значение платформы приложения; допустимые значения: `Android`, `iOS`.
-1. `store_id` содержит значение Store ID приложения. Для iOS приложений `store_id` указывается с ‘id’ в начале строки, например`id84435554334`. Для Android приложений `store_id` совпадает с `bundle_id`.
+1. `store_id` содержит значение Store ID приложения. Для iOS приложений `store_id` указывается с ‘id’ в начале строки, например `id84435554334`. Для Android приложений `store_id` совпадает с `bundle_id`.
 1. `locale` содержит значение основной локализации устройства пользователя. Значение должно иметь формат в стандарте **RFC 3066** – `ru`, `en`, `en_US`, либо значения `English`, `French`, `Spanish`, `Italian` и т. д.
 
 ### Данные Firebase Messaging
@@ -141,11 +140,10 @@ Status: 200 (OK)
 > Если Firebase Messaging не может быть инициализирован поля ниже пропускаются. Запрос отправляется без них.
 {: .callout .warn}
 
-1. `push_token`содержит значение текущего токена регистрации Firebase Messaging. [Подробнее о настройке Firebase Messaging и получении токена](https://firebase.google.com/docs/cloud-messaging).
+1. `push_token` содержит значение текущего токена регистрации Firebase Messaging. [Подробнее о настройке Firebase Messaging и получении токена](https://firebase.google.com/docs/cloud-messaging).
 
-   > ☝
-   >
    > При обновлении токена необходимо сразу же передать его в новом запросе.
+   {: .callout .note}
 
 1. `firebase_project_id` содержит значение Firebase `Project number` или `Project ID`.
 
