@@ -208,10 +208,11 @@ button { font: inherit; color: inherit; }
 .doc details > :not(summary) { margin-left: 16px; margin-right: 16px; }
 .doc details > :nth-child(2) { margin-top: 12px; }
 
-.figma-card { display: flex; align-items: center; gap: 14px; margin: 6px 0 20px; padding: 14px 18px; border: 1px solid var(--line); border-radius: var(--radius); color: var(--fg); transition: border-color .15s, box-shadow .15s; }
-.figma-card:hover { text-decoration: none; border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); box-shadow: var(--shadow); }
-.figma-card strong { display: block; font-weight: 600; font-size: 14.5px; }
-.figma-card small { color: var(--muted); font-size: 13px; }
+.figma-embed { margin: 8px 0 24px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--bg-soft); }
+.figma-embed iframe { display: block; width: 100%; aspect-ratio: 16 / 10; min-height: 320px; border: 0; background: var(--bg-soft); }
+.figma-embed figcaption { display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-top: 1px solid var(--line); background: var(--bg); font-size: 13px; color: var(--muted); }
+.figma-embed figcaption a { font-weight: 600; }
+.figma-embed .figma-logo { width: 22px; height: 22px; border-radius: 6px; background-size: 10px; }
 .figma-logo { flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: var(--bg-mute) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 57'%3E%3Cpath fill='%231abcfe' d='M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z'/%3E%3Cpath fill='%230acf83' d='M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z'/%3E%3Cpath fill='%23ff7262' d='M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z'/%3E%3Cpath fill='%23f24e1e' d='M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z'/%3E%3Cpath fill='%23a259ff' d='M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z'/%3E%3C/svg%3E") center/14px no-repeat; }
 
 /* Home */

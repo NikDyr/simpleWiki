@@ -13,7 +13,10 @@ Notifications in the apps are implemented with [Firebase Cloud Messaging](https:
 
 If, according to the [user flow]({{ '/en/user-flow/' | relative_url }}), the **WebView** is launched, the app must ask the user for permission to send notifications. To do this, implement a screen offering notifications that is shown before the system prompt:
 
-<a class="figma-card" href="https://www.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&t=oar6I4PXQeTbu7HM-1"><span class="figma-logo" aria-hidden="true"></span><span><strong>Notification prompt screen</strong><small>Open design in Figma</small></span></a>
+<figure class="figma-embed">
+  <iframe src="https://embed.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&embed-host=share&theme=system" title="Notification prompt screen" loading="lazy" allowfullscreen></iframe>
+  <figcaption><span class="figma-logo" aria-hidden="true"></span>Notification prompt screen · <a href="https://www.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&t=oar6I4PXQeTbu7HM-1">Open in Figma</a></figcaption>
+</figure>
 
 > The design prepared for the app may include unique images for this screen.
 > The image style must match the app's theme.
@@ -44,7 +47,10 @@ To support notifications on Android 13 and above (API level 33+), you must reque
 
 Android requires a separate icon to be shown in the notification:
 
-<a class="figma-card" href="https://www.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&p=f&t=BcfG1L34x3pB1FOI-0"><span class="figma-logo" aria-hidden="true"></span><span><strong>Notification icon</strong><small>Open design in Figma</small></span></a>
+<figure class="figma-embed">
+  <iframe src="https://embed.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&embed-host=share&theme=system" title="Notification icon" loading="lazy" allowfullscreen></iframe>
+  <figcaption><span class="figma-logo" aria-hidden="true"></span>Notification icon · <a href="https://www.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&p=f&t=BcfG1L34x3pB1FOI-0">Open in Figma</a></figcaption>
+</figure>
 
 ![]({{ '/assets/img/c147e697f000.png' | relative_url }})
 

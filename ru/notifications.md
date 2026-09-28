@@ -13,7 +13,10 @@ nav_order: 4
 
 Если согласно [сценарию пользовательского взаимодействия]({{ '/ru/user-flow/' | relative_url }}) запускается **WebView**, необходимо запросить у пользователя разрешение на отправку уведомлений. Для этого реализуется экран с предложением получать уведомления, который отображается перед системным запросом:
 
-<a class="figma-card" href="https://www.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&t=oar6I4PXQeTbu7HM-1"><span class="figma-logo" aria-hidden="true"></span><span><strong>Экран запроса уведомлений</strong><small>Открыть макет в Figma</small></span></a>
+<figure class="figma-embed">
+  <iframe src="https://embed.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&embed-host=share&theme=system" title="Экран запроса уведомлений" loading="lazy" allowfullscreen></iframe>
+  <figcaption><span class="figma-logo" aria-hidden="true"></span>Экран запроса уведомлений · <a href="https://www.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&t=oar6I4PXQeTbu7HM-1">Открыть в Figma</a></figcaption>
+</figure>
 
 > Подготовленный для приложения дизайн может содержать уникальные изображения для данного экрана.
 > Стиль изображений должен соответствовать тематике приложения.
@@ -44,7 +47,10 @@ nav_order: 4
 
 Для Android необходимо использовать отдельную иконку, которая будет отображаться в уведомлении:
 
-<a class="figma-card" href="https://www.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&p=f&t=BcfG1L34x3pB1FOI-0"><span class="figma-logo" aria-hidden="true"></span><span><strong>Иконка уведомлений</strong><small>Открыть макет в Figma</small></span></a>
+<figure class="figma-embed">
+  <iframe src="https://embed.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&embed-host=share&theme=system" title="Иконка уведомлений" loading="lazy" allowfullscreen></iframe>
+  <figcaption><span class="figma-logo" aria-hidden="true"></span>Иконка уведомлений · <a href="https://www.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&p=f&t=BcfG1L34x3pB1FOI-0">Открыть в Figma</a></figcaption>
+</figure>
 
 ![]({{ '/assets/img/c147e697f000.png' | relative_url }})
 
