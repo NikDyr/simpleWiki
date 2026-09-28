@@ -18,4 +18,4 @@ parent: "changelog"
 
 Flutter and Kotlin builds must also be updated to support 16 KB page sizes.
 
-[Support 16 KB page sizes  |  Compatibility  |  Android Developers](https://developer.android.com/guide/practices/page-sizes#build)
+[Support 16 KB page sizes (Android Developers)](https://developer.android.com/guide/practices/page-sizes#build)

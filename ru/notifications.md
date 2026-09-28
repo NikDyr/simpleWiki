@@ -39,9 +39,8 @@ nav_order: 4
 
 Для поддержки уведомлений в Android 13 и выше (API level 33+) необходимо запросить разрешение на отправку уведомлений, для этого надо добавить соответствующее разрешение в манифест и вызвать метод, запрашивающий разрешение.
 
-[Notification runtime permission  |  Views  |  Android Developers](https://developer.android.com/develop/ui/views/notifications/notification-permission)
-
-[ActivityCompat  |  API reference  |  Android Developers](https://developer.android.com/reference/androidx/core/app/ActivityCompat#requestPermissions(android.app.Activity,%20java.lang.String%5B%5D,%20int))
+- [Разрешение на уведомления во время выполнения (Android Developers)](https://developer.android.com/develop/ui/views/notifications/notification-permission)
+- [ActivityCompat.requestPermissions — справочник API (Android Developers)](<https://developer.android.com/reference/androidx/core/app/ActivityCompat#requestPermissions(android.app.Activity,%20java.lang.String%5B%5D,%20int)>)
 
 ---
 

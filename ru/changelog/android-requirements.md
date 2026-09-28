@@ -18,4 +18,4 @@ parent: "changelog"
 
 Flutter и Kotlin сборки также необходимо актуализировать для поддержки страниц размером 16КБ
 
-[Поддержка размеров страниц 16 КБ.  |  Compatibility  |  Android Developers](https://developer.android.com/guide/practices/page-sizes?hl=ru#build)
+[Поддержка размеров страниц 16 КБ (Android Developers)](https://developer.android.com/guide/practices/page-sizes?hl=ru#build)

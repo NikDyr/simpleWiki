@@ -39,9 +39,8 @@ If, according to the [user flow]({{ '/en/user-flow/' | relative_url }}), the **W
 
 To support notifications on Android 13 and above (API level 33+), you must request the notification permission: add the corresponding permission to the manifest and call the method that requests it.
 
-[Notification runtime permission  |  Views  |  Android Developers](https://developer.android.com/develop/ui/views/notifications/notification-permission)
-
-[ActivityCompat  |  API reference  |  Android Developers](https://developer.android.com/reference/androidx/core/app/ActivityCompat#requestPermissions(android.app.Activity,%20java.lang.String%5B%5D,%20int))
+- [Notification runtime permission (Android Developers)](https://developer.android.com/develop/ui/views/notifications/notification-permission)
+- [ActivityCompat.requestPermissions — API reference (Android Developers)](<https://developer.android.com/reference/androidx/core/app/ActivityCompat#requestPermissions(android.app.Activity,%20java.lang.String%5B%5D,%20int)>)
 
 ---
 
