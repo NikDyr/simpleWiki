@@ -58,6 +58,26 @@
     toc.hidden = true;
   }
 
+  // Tabs: <div class="tabs"><section data-tab="Label">…</section>…</div>
+  doc.querySelectorAll(".tabs").forEach(function (box, n) {
+    var sections = box.querySelectorAll(":scope > section");
+    if (sections.length < 2) return;
+    var list = document.createElement("div");
+    list.className = "tab-list"; list.setAttribute("role", "tablist");
+    sections.forEach(function (sec, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.setAttribute("role", "tab"); b.textContent = sec.dataset.tab;
+      b.id = "tab-" + n + "-" + i; sec.setAttribute("role", "tabpanel"); sec.setAttribute("aria-labelledby", b.id);
+      b.addEventListener("click", function () {
+        list.querySelectorAll("button").forEach(function (x, j) { x.setAttribute("aria-selected", j === i); sections[j].hidden = j !== i; });
+      });
+      list.appendChild(b);
+    });
+    box.prepend(list);
+    box.classList.add("ready");
+    list.firstChild.click();
+  });
+
   // Copy buttons on code blocks
   doc.querySelectorAll("pre").forEach(function (pre) {
     var b = document.createElement("button");

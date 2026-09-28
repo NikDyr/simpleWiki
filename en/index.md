@@ -21,7 +21,7 @@ Requirements and scenarios for building and testing apps: WebView launch, the co
 
 ## Recent changes
 
-> The requirement to append app data to the user agent was removed on 10.06.2026.
+> Whether the user agent is extended with app data depends on the order — see [item 11 "User agent"]({{ '/en/app-requirements/' | relative_url }}#user-agent).
 {: .callout .info}
 
 {% assign log = site.pages | where: "parent", "changelog" | where: "lang", page.lang %}

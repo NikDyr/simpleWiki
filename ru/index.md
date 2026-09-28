@@ -21,7 +21,7 @@ layout: home
 
 ## Последние изменения
 
-> Требование дополнять юзерагент данными приложения удалено 10.06.2026
+> Дополнение user agent данными приложения зависит от заказа — см. [п. 11 «User agent»]({{ '/ru/app-requirements/' | relative_url }}#user-agent).
 {: .callout .info}
 
 {% assign log = site.pages | where: "parent", "changelog" | where: "lang", page.lang %}

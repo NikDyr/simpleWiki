@@ -67,14 +67,32 @@ nav_order: 5
 1. **WebView loading**  
    The WebView must load when certain conditions are met, as described in [User Flow]({{ '/en/user-flow/' | relative_url }}).  
    Test scenario for launching the WebView: `"af_status":"Non-organic"` in the conversion data. All described scenarios must be tested.
-1. **User agent**
+1. <span id="user-agent"></span>**User agent**  
+   User agent requirements depend on the order: check with the manager which version your app needs.
+
+   <div class="tabs" markdown="1">
+   <section markdown="1" data-tab="Basic user agent">
+
    - must not indicate that a WebView is used
    - must reflect up-to-date device information
-   - ~~is extended with the app ID and app name~~
 
    ```
    Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
    ```
+
+   </section>
+   <section markdown="1" data-tab="Appended user agent">
+
+   - must not indicate that a WebView is used
+   - must reflect up-to-date device information
+   - **is extended with the app ID and app name** at the end of the string: `appid/<app ID> appname/<app name>`
+
+   ```
+   Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 appid/6759667623 appname/ApplicationNaming
+   ```
+
+   </section>
+   </div>
 
 1. **WebView size**  
    The WebView must be displayed within the Safe Area (the screen area where content is guaranteed not to be covered by bezels, the camera, etc.) in any screen orientation, and also after locking and unlocking the device.
