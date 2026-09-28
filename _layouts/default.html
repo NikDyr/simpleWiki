@@ -5,7 +5,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>try{var th=localStorage.getItem("theme");if(th)document.documentElement.dataset.theme=th}catch(e){}</script>
+  <script>
+    (function (r) {
+      try { var th = localStorage.getItem("theme"); if (th) r.dataset.theme = th; } catch (e) {}
+      var ua = new URLSearchParams(location.search).get("ua");
+      try {
+        if (ua) localStorage.setItem("ua", ua); else ua = localStorage.getItem("ua");
+      } catch (e) {}
+      r.dataset.ua = ua === "appended" ? "appended" : "basic";
+    })(document.documentElement);
+  </script>
   {% seo title=false %}
   <title>{% if page.title and page.ref != 'index' %}{{ page.title }} · {% endif %}{{ t.site_title | default: site.title }}</title>
   {%- if page.ref -%}{%- assign siblings = site.pages | where: "ref", page.ref -%}{%- for p in siblings %}

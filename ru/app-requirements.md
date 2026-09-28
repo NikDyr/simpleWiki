@@ -67,11 +67,8 @@ nav_order: 5
 1. **Загрузка WebView**  
    Загрузка WebView должна происходить при выполнении определенных условий, описанных в разделе [Сценарий пользовательского взаимодействия]({{ '/ru/user-flow/' | relative_url }}).  
    Тестовый сценарий для запуска WebView: `“af_status”:”Non-organic”` в данных конверсии. Требуется проверка всех описанных сценариев.
-1. <span id="user-agent"></span>**User agent**  
-   Требования к user agent зависят от заказа: уточните у менеджера, какой вариант нужен для вашего приложения.
-
-   <div class="tabs" markdown="1">
-   <section markdown="1" data-tab="Базовый user agent">
+1. <span id="user-agent"></span>**User agent**
+   <div class="variant" data-variant="basic" markdown="1">
 
    - не должен указывать на использование вебвью
    - должен отражать актуальную информацию об устройстве
@@ -80,8 +77,8 @@ nav_order: 5
    Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
    ```
 
-   </section>
-   <section markdown="1" data-tab="Дополненный user agent">
+   </div>
+   <div class="variant" data-variant="appended" markdown="1">
 
    - не должен указывать на использование вебвью
    - должен отражать актуальную информацию об устройстве
@@ -91,7 +88,6 @@ nav_order: 5
    Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 appid/6759667623 appname/ApplicationNaming
    ```
 
-   </section>
    </div>
 
 1. **Размер WebView**  
