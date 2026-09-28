@@ -1,9 +1,19 @@
-<h3>{{ t.pages }}</h3>
-<ul>
-{%- assign list = site.pages | where: "lang", lang | sort: "nav_order" -%}
-{%- for p in list -%}
-  {%- if p.title and p.nav_exclude != true -%}
-  <li><a href="{{ p.url | relative_url }}"{% if p.url == page.url %} class="active"{% endif %}>{{ p.title }}</a></li>
-  {%- endif -%}
-{%- endfor -%}
+{%- assign all = site.pages | where: "lang", lang -%}
+{%- assign top = all | where_exp: "p", "p.nav_order" | sort: "nav_order" -%}
+<ul class="nav">
+{%- for p in top -%}
+  {%- assign kids = all | where: "parent", p.ref -%}
+  {%- assign open = false -%}
+  {%- if page.ref == p.ref or page.parent == p.ref -%}{%- assign open = true -%}{%- endif %}
+  <li{% if open %} class="open"{% endif %}>
+    <a href="{{ p.url | relative_url }}"{% if p.url == page.url %} class="active" aria-current="page"{% endif %}>{{ p.title }}</a>
+    {%- if kids.size > 0 %}
+    <ul>
+      {%- for k in kids %}
+      <li><a href="{{ k.url | relative_url }}"{% if k.url == page.url %} class="active" aria-current="page"{% endif %}>{{ k.title }}</a></li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </li>
+{%- endfor %}
 </ul>

@@ -1,7 +1,7 @@
 ---
 title: "Требуется поддержка Unified deep linking на всех платформах"
 ref: "changelog/unified-deep-linking"
-nav_exclude: true
+parent: "changelog"
 ---
 
 ## Требуется поддержка Unified deep linking на всех платформах

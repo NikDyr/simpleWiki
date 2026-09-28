@@ -1,7 +1,7 @@
 ---
 title: "Создание новой OneLink ссылки"
 ref: "onelink"
-nav_exclude: true
+parent: "app-requirements"
 ---
 
 1. Сперва необходимо создать новый OneLink template в выделенном под приложение AppsFlyer аккаунте.
@@ -34,8 +34,7 @@ nav_exclude: true
 
 1. После этого нажать Update link
 
-> ☝
->
 > Для имитации не органической установки OneLink ссылку требуется дополнить параметром `is_retargeting=true`
 >
 > В противном случае только самая первая установка будет отражена как не органика.
+{: .callout .note}

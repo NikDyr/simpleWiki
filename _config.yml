@@ -9,6 +9,7 @@ url: "https://nikdyr.github.io"
 languages: [ru, en]
 default_lang: ru
 
+permalink: pretty
 markdown: kramdown
 kramdown:
   input: GFM

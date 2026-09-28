@@ -7,15 +7,17 @@ nav_order: 4
 Уведомления в приложениях реализуются с помощью [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging).
 
 > **НЕ МЕНЯТЬ ПРОЕКТ FIREBASE БЕЗ СОГЛАСОВАНИЯ С МЕНЕДЖЕРОМ  - ЭТО СЛОМАЕТ ПУШИ**
+{: .callout .note}
 
 ---
 
 Если согласно Сценарий пользовательского взаимодействия запускается **WebView**, необходимо запросить у пользователя разрешение на отправку уведомлений. Для этого реализуется экран с предложением получать уведомления, который отображается перед системным запросом:
 
-[Макет в Figma](https://embed.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&t=oar6I4PXQeTbu7HM-1&embed-host=notion&footer=false&theme=system)
+<iframe class="figma" src="https://embed.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&t=oar6I4PXQeTbu7HM-1&embed-host=notion&footer=false&theme=system" allowfullscreen loading="lazy"></iframe>
 
-> 🎨 Подготовленный для приложения дизайн может содержать уникальные изображения для данного экрана.
+> Подготовленный для приложения дизайн может содержать уникальные изображения для данного экрана.
 > Стиль изображений должен соответствовать тематике приложения.
+{: .callout .note}
 
 **Экран запроса должен быть отображен если:**
 
@@ -38,7 +40,7 @@ nav_order: 4
 
 Для Android необходимо использовать отдельную иконку, которая будет отображаться в уведомлении:
 
-[Макет в Figma](https://embed.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&p=f&t=BcfG1L34x3pB1FOI-0&embed-host=notion&footer=false&theme=system)
+<iframe class="figma" src="https://embed.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&p=f&t=BcfG1L34x3pB1FOI-0&embed-host=notion&footer=false&theme=system" allowfullscreen loading="lazy"></iframe>
 
 ![]({{ '/assets/img/c147e697f000.png' | relative_url }})
 
@@ -59,7 +61,7 @@ nav_order: 4
 > 🧩
 >
 >
-> ### Интеграция с FCM
+> Интеграция с FCM
 >
 > **Для работы уведомлений** **необходимо подключать сервисный аккаунт**  
 > `marla-export@marfa-290610.iam.gserviceaccount.com` и `iosandroidpushes@iosandroidpushes.iam.gserviceaccount.com` к проекту Firebase через Google Cloud Platform с ролью `Basic → Owner`. Для этого надо:
@@ -69,18 +71,17 @@ nav_order: 4
 > - нажать кнопку `+ Add` для добавления нового пользователя
 > - добавить сервисный аккаунт `marla-export@marfa-290610.iam.gserviceaccount.com` и `iosandroidpushes@iosandroidpushes.iam.gserviceaccount.com` и указать уровень доступа `Owner` в категории `Basic`
 > - Сохранить изменения, нажатием кнопки `Save`
+{: .callout .note}
 
-> ⚠️
->
 > При необходимости заменить Firebase проект сообщите об этом менеджеру.
 >
 > > **НЕ МЕНЯТЬ ПРОЕКТ FIREBASE БЕЗ СОГЛАСОВАНИЯ С МЕНЕДЖЕРОМ  - ЭТО СЛОМАЕТ ПУШИ**
+{: .callout .warn}
 
 ---
 
-> ⚠️
->
 > Для работы системы уведомлений необходимо отправить данные через Запрос к конфигу
+{: .callout .warn}
 
 ---
 

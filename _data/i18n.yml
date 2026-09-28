@@ -7,6 +7,11 @@ en:
   edit: Edit this page
   updated: Last updated
   not_translated: This page is not yet translated.
+  on_page: On this page
+  prev: Previous
+  next: Next
+  copy: Copy
+  copied: Copied
 ru:
   name: Русский
   home: Главная
@@ -16,3 +21,8 @@ ru:
   edit: Редактировать страницу
   updated: Обновлено
   not_translated: Эта страница ещё не переведена.
+  on_page: На этой странице
+  prev: Назад
+  next: Далее
+  copy: Копировать
+  copied: Скопировано

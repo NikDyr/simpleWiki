@@ -1,7 +1,7 @@
 ---
 title: "Актуализация требований для Android сборок"
 ref: "changelog/android-requirements"
-nav_exclude: true
+parent: "changelog"
 ---
 
 ## Актуализация требований для Android сборок

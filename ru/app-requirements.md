@@ -4,10 +4,8 @@ ref: "app-requirements"
 nav_order: 5
 ---
 
-> ‼️
->
->
-> ##### **НЕ МЕНЯТЬ ПРОЕКТ FIREBASE БЕЗ СОГЛАСОВАНИЯ С МЕНЕДЖЕРОМ  - ЭТО СЛОМАЕТ ПУШИ**
+> **НЕ МЕНЯТЬ ПРОЕКТ FIREBASE БЕЗ СОГЛАСОВАНИЯ С МЕНЕДЖЕРОМ  - ЭТО СЛОМАЕТ ПУШИ**
+{: .callout .danger}
 
 ---
 
@@ -96,26 +94,26 @@ Mozilla/5.0 (iPhone; CPU iPhone OS 18_1_1 like Mac OS X) AppleWebKit/605.1.15 (K
 
    ```swift
    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-       let nsError = error as NSError
-       if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorHTTPTooManyRedirects {
-           if let url = lastRedirectURL {
-               let request = URLRequest(url: url)
-               webView.load(request)
-           }
+   let nsError = error as NSError
+   if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorHTTPTooManyRedirects {
+       if let url = lastRedirectURL {
+           let request = URLRequest(url: url)
+           webView.load(request)
        }
+   }
    }
    ```
 
    ```c#
    mainWebView.OnLoadingErrorReceived += (webView, code, message, payload) =>
+       {
+           if (code is -1007 or -9 or 0 &&
+               payload.Extra != null &&
+               payload.Extra.TryGetValue(UniWebViewNativeResultPayload.ExtraFailingURLKey, out var value))
            {
-               if (code is -1007 or -9 or 0 &&
-                   payload.Extra != null &&
-                   payload.Extra.TryGetValue(UniWebViewNativeResultPayload.ExtraFailingURLKey, out var value))
-               {
-                   webView.Load((string)value);
-               }
-           };
+               webView.Load((string)value);
+           }
+       };
    ```
 
 </details>

@@ -1,11 +1,8 @@
-<nav class="langs">
+<nav class="langs" aria-label="Language">
 {%- for code in site.languages -%}
   {%- assign target = nil -%}
-  {%- if page.ref -%}
-    {%- assign target = site.pages | where: "ref", page.ref | where: "lang", code | first -%}
-  {%- endif -%}
-  {%- if target -%}{%- assign href = target.url -%}{%- else -%}{%- assign href = '/' | append: code | append: '/' -%}{%- endif -%}
-  <a href="{{ href | relative_url }}" hreflang="{{ code }}"{% if code == lang %} class="active"{% endif %}
-     title="{{ site.data.i18n[code].name }}">{{ code | upcase }}</a>
-{%- endfor -%}
+  {%- if page.ref -%}{%- assign target = site.pages | where: "ref", page.ref | where: "lang", code | first -%}{%- endif -%}
+  {%- if target -%}{%- assign href = target.url -%}{%- else -%}{%- assign href = '/' | append: code | append: '/' -%}{%- endif %}
+  <a href="{{ href | relative_url }}" hreflang="{{ code }}"{% if code == lang %} class="active" aria-current="true"{% endif %} title="{{ site.data.i18n[code].name }}">{{ code | upcase }}</a>
+{%- endfor %}
 </nav>
