@@ -68,7 +68,7 @@ nav_order: 5
    The WebView must load when certain conditions are met, as described in [User Flow]({{ '/en/user-flow/' | relative_url }}).  
    Test scenario for launching the WebView: `"af_status":"Non-organic"` in the conversion data. All described scenarios must be tested.
 1. <span id="user-agent"></span>**User agent**
-   <div class="variant" data-variant="basic" markdown="1">
+   <div class="variant" data-variant="basic" data-label="Basic user agent" markdown="1">
 
    - must not indicate that a WebView is used
    - must reflect up-to-date device information
@@ -78,7 +78,7 @@ nav_order: 5
    ```
 
    </div>
-   <div class="variant" data-variant="appended" markdown="1">
+   <div class="variant" data-variant="appended" data-label="Appended user agent" markdown="1">
 
    - must not indicate that a WebView is used
    - must reflect up-to-date device information

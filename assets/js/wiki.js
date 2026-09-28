@@ -19,16 +19,28 @@
   if (scrim) scrim.addEventListener("click", function () { setNav(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setNav(false); });
 
-  // Doc variant chosen by the manager's link: carry it through internal links
-  var ua = root.dataset.ua;
-  if (ua && ua !== "basic") {
+  // Doc variant (?ua=appended): the manager's link picks it, the selector can change it
+  function carryVariant() {
+    var ua = root.dataset.ua;
     document.querySelectorAll("a[href]").forEach(function (a) {
       if (a.host !== location.host || a.getAttribute("href").charAt(0) === "#") return;
       var u = new URL(a.href);
-      u.searchParams.set("ua", ua);
+      if (ua && ua !== "basic") u.searchParams.set("ua", ua); else u.searchParams.delete("ua");
       a.href = u.toString();
     });
   }
+  function setVariant(ua) {
+    root.dataset.ua = ua;
+    try { localStorage.setItem("ua", ua); } catch (e) {}
+    var u = new URL(location.href);
+    if (ua === "basic") u.searchParams.delete("ua"); else u.searchParams.set("ua", ua);
+    history.replaceState(null, "", u);
+    carryVariant();
+    document.querySelectorAll(".variant-switch button").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.dataset.variant === ua);
+    });
+  }
+  carryVariant();
 
   var doc = document.querySelector(".doc"), main = document.querySelector(".content");
   if (!doc) return;
@@ -68,6 +80,27 @@
   } else if (toc) {
     toc.hidden = true;
   }
+
+  // Variant selector above the first variant block of each group
+  var seen = [];
+  doc.querySelectorAll(".variant").forEach(function (v) {
+    var parent = v.parentNode;
+    if (seen.indexOf(parent) !== -1) return;
+    seen.push(parent);
+    var group = parent.querySelectorAll(":scope > .variant");
+    if (group.length < 2) return;
+    var sw = document.createElement("div");
+    sw.className = "variant-switch"; sw.setAttribute("role", "group");
+    group.forEach(function (g) {
+      var b = document.createElement("button");
+      b.type = "button"; b.dataset.variant = g.dataset.variant;
+      b.textContent = g.dataset.label || g.dataset.variant;
+      b.setAttribute("aria-pressed", g.dataset.variant === root.dataset.ua);
+      b.addEventListener("click", function () { setVariant(g.dataset.variant); });
+      sw.appendChild(b);
+    });
+    parent.insertBefore(sw, group[0]);
+  });
 
   // Copy buttons on code blocks
   doc.querySelectorAll("pre").forEach(function (pre) {

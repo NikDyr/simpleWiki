@@ -68,7 +68,7 @@ nav_order: 5
    Загрузка WebView должна происходить при выполнении определенных условий, описанных в разделе [Сценарий пользовательского взаимодействия]({{ '/ru/user-flow/' | relative_url }}).  
    Тестовый сценарий для запуска WebView: `“af_status”:”Non-organic”` в данных конверсии. Требуется проверка всех описанных сценариев.
 1. <span id="user-agent"></span>**User agent**
-   <div class="variant" data-variant="basic" markdown="1">
+   <div class="variant" data-variant="basic" data-label="Базовый user agent" markdown="1">
 
    - не должен указывать на использование вебвью
    - должен отражать актуальную информацию об устройстве
@@ -78,7 +78,7 @@ nav_order: 5
    ```
 
    </div>
-   <div class="variant" data-variant="appended" markdown="1">
+   <div class="variant" data-variant="appended" data-label="Дополненный user agent" markdown="1">
 
    - не должен указывать на использование вебвью
    - должен отражать актуальную информацию об устройстве
