@@ -58,7 +58,11 @@
     </main>
     <nav class="toc" aria-label="{{ t.on_page }}"><h4>{{ t.on_page }}</h4><ul></ul></nav>
   </div>
+  {%- if site.data.glossary[lang] %}
+  <script id="glossary-data" type="application/json" data-base="{{ '/' | append: lang | append: '/' | relative_url }}" data-more="{{ t.more }}">{{ site.data.glossary[lang] | jsonify }}</script>
+  {%- endif %}
   <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
   <script src="{{ '/assets/js/wiki.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/glossary.js' | relative_url }}"></script>
 </body>
 </html>

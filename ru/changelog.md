@@ -1,7 +1,7 @@
 ---
 title: "Последние изменения"
 ref: "changelog"
-nav_order: 6
+nav_order: 7
 ---
 
 - [Требуется вносить второй сервисный аккаунт при интеграции firebase messaging]({{ '/ru/changelog/firebase-service-account/' | relative_url }})

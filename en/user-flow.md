@@ -21,8 +21,8 @@ The first launch of the app requires an active internet connection. Depending on
   - The user is shown the **WebView**.
 - **1.2 The WebView launch condition is not met:**
   - The request to the **[endpoint]({{ '/en/config-request/' | relative_url }})** returned a negative response.
-  - The mode is set to **wrapper**, and on subsequent launches the app must open in this mode (2.2).
-  - The user is shown the **wrapper (a game or other content)**.
+  - The mode is set to **stub**, and on subsequent launches the app must open in this mode (2.2).
+  - The user is shown the **stub (a game or other content)**.
 - **1.3 No internet connection:**
   - The app cannot send the request to the **endpoint**.
   - The user sees a **"No internet" placeholder screen**.
@@ -40,9 +40,9 @@ When reopened, the app must launch in the previously set mode:
   - If the **WebView** was shown on first launch, it must open on every subsequent launch.
   - The link to display is requested from the **endpoint**; if the **endpoint** does not respond, the **WebView** must display the last successfully received link.
   - If there is no internet connection, the "No internet" placeholder is shown.
-- **2.2 Wrapper mode:**
-  - If the **wrapper** was shown on first launch, the user also gets the **wrapper** on subsequent launches.
-  - Internet is only required on first launch; after that the **wrapper** is shown regardless of network availability.
+- **2.2 Stub mode:**
+  - If the **stub** was shown on first launch, the user also gets the **stub** on subsequent launches.
+  - Internet is only required on first launch; after that the **stub** is shown regardless of network availability.
 
 #### 3. Push notifications
 > Firebase Messaging is used for notifications.

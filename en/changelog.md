@@ -1,7 +1,7 @@
 ---
 title: "Recent Changes"
 ref: "changelog"
-nav_order: 6
+nav_order: 7
 ---
 
 - [A second service account is required for Firebase Messaging integration]({{ '/en/changelog/firebase-service-account/' | relative_url }})

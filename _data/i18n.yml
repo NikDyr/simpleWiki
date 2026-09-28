@@ -13,6 +13,7 @@ en:
   next: Next
   copy: Copy
   copied: Copied
+  more: Details
 ru:
   name: Русский
   site_title: Требования к приложениям
@@ -28,3 +29,4 @@ ru:
   next: Далее
   copy: Копировать
   copied: Скопировано
+  more: Подробнее
