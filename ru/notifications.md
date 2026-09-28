@@ -6,14 +6,14 @@ nav_order: 4
 
 Уведомления в приложениях реализуются с помощью [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging).
 
-> **НЕ МЕНЯТЬ ПРОЕКТ FIREBASE БЕЗ СОГЛАСОВАНИЯ С МЕНЕДЖЕРОМ  - ЭТО СЛОМАЕТ ПУШИ**
-{: .callout .note}
+> **Не менять проект Firebase без согласования с менеджером** — это сломает пуши.
+{: .callout .danger}
 
 ---
 
 Если согласно Сценарий пользовательского взаимодействия запускается **WebView**, необходимо запросить у пользователя разрешение на отправку уведомлений. Для этого реализуется экран с предложением получать уведомления, который отображается перед системным запросом:
 
-<iframe class="figma" src="https://embed.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&t=oar6I4PXQeTbu7HM-1&embed-host=notion&footer=false&theme=system" allowfullscreen loading="lazy"></iframe>
+<a class="figma-card" href="https://www.figma.com/design/amAQaFjDIzjYyL0W0l4KIh/Push?node-id=0-1&t=oar6I4PXQeTbu7HM-1"><span class="figma-logo" aria-hidden="true"></span><span><strong>Экран запроса уведомлений</strong><small>Открыть макет в Figma</small></span></a>
 
 > Подготовленный для приложения дизайн может содержать уникальные изображения для данного экрана.
 > Стиль изображений должен соответствовать тематике приложения.
@@ -23,6 +23,7 @@ nav_order: 4
 
 - Разрешение ещё не получено и есть возможность его запросить
 - Последний отказ был более 3 дней назад
+
 **Кнопки:**
 
 - **“Yes, I Want Bonuses!”** — запрашивает системное разрешение на уведомления с последующим переходом к WebView
@@ -40,7 +41,7 @@ nav_order: 4
 
 Для Android необходимо использовать отдельную иконку, которая будет отображаться в уведомлении:
 
-<iframe class="figma" src="https://embed.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&p=f&t=BcfG1L34x3pB1FOI-0&embed-host=notion&footer=false&theme=system" allowfullscreen loading="lazy"></iframe>
+<a class="figma-card" href="https://www.figma.com/design/FeBnHuFUJBa2mv0t68d314/Notification-icon?node-id=0-1&p=f&t=BcfG1L34x3pB1FOI-0"><span class="figma-logo" aria-hidden="true"></span><span><strong>Иконка уведомлений</strong><small>Открыть макет в Figma</small></span></a>
 
 ![]({{ '/assets/img/c147e697f000.png' | relative_url }})
 

@@ -43,7 +43,7 @@
   <div class="layout">
     <aside class="sidebar">{% include sidebar.html %}</aside>
     <div class="scrim"></div>
-    <main class="content">
+    <main class="content" data-copy="{{ t.copy }}" data-copied="{{ t.copied }}">
       {{ content }}
     </main>
     <nav class="toc" aria-label="{{ t.on_page }}"><h4>{{ t.on_page }}</h4><ul></ul></nav>
