@@ -2,6 +2,7 @@
 title: "Актуализация требований для Android сборок"
 ref: "changelog/android-requirements"
 parent: "changelog"
+date: 2026-03-23 13:26:03 +0300
 ---
 
 > *Starting November 1st, 2025, all new apps and updates to existing apps submitted to Google Play and targeting Android 15+ devices must support 16 KB page sizes.*

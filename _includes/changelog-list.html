@@ -1,0 +1,12 @@
+{%- comment -%} Changelog entries of the current language, newest first (by front matter `date`; add a time to order same-day entries). Optional: limit=N {%- endcomment -%}
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign log = site.pages | where: "parent", "changelog" | where: "lang", page.lang | sort: "date" | reverse -%}
+<ul class="changes">
+{%- for p in log limit: include.limit %}
+  <li><a href="{{ p.url | relative_url }}">
+    <time datetime="{{ p.date | date: '%Y-%m-%d' }}">{{ p.date | date: t.date_format }}</time>
+    <span class="change-title">{{ p.title }}</span>
+    {%- if forloop.first %}<span class="badge">{{ t.latest }}</span>{% endif -%}
+  </a></li>
+{%- endfor %}
+</ul>

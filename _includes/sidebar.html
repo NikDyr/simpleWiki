@@ -3,6 +3,7 @@
 <ul class="nav">
 {%- for p in top -%}
   {%- assign kids = all | where: "parent", p.ref -%}
+  {%- if p.ref == "changelog" %}{% assign kids = kids | sort: "date" | reverse %}{% endif -%}
   {%- assign open = false -%}
   {%- if page.ref == p.ref or page.parent == p.ref -%}{%- assign open = true -%}{%- endif %}
   <li{% if open %} class="open"{% endif %}>

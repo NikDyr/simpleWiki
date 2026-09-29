@@ -21,11 +21,6 @@ layout: home
 
 ## Последние изменения
 
-{% assign log = site.pages | where: "parent", "changelog" | where: "lang", page.lang %}
-<ul class="changes">
-{%- for p in log %}
-  <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
-{%- endfor %}
-</ul>
+{% include changelog-list.html limit=4 %}
 
 [Все изменения →]({{ '/ru/changelog/' | relative_url }})

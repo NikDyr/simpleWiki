@@ -2,6 +2,7 @@
 title: "Требуется поддержка Unified deep linking на всех платформах"
 ref: "changelog/unified-deep-linking"
 parent: "changelog"
+date: 2026-03-23 13:26:01 +0300
 ---
 
 ### Данные deep linking AppsFlyer (UDL) при запросе к конфигу

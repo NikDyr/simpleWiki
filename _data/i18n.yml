@@ -16,6 +16,8 @@ en:
   more: Details
   confirm_yes: Yes, my order requires it
   confirm_no: Cancel
+  latest: Latest
+  date_format: "%b %-d, %Y"
 ru:
   name: Русский
   site_title: Требования к приложениям
@@ -34,3 +36,5 @@ ru:
   more: Подробнее
   confirm_yes: Да, это требование моего заказа
   confirm_no: Отмена
+  latest: Последнее
+  date_format: "%d.%m.%Y"

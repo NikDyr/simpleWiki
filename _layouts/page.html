@@ -11,6 +11,9 @@ layout: default
 </nav>
 <article class="doc">
   <h1>{{ page.title }}</h1>
+  {%- if page.parent == "changelog" and page.date %}
+  <p class="page-date"><time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: t.date_format }}</time></p>
+  {%- endif %}
   {{ content }}
 </article>
 {%- assign top = all | where_exp: "p", "p.nav_order" | sort: "nav_order" -%}
