@@ -105,7 +105,8 @@ nav_order: 4
    			"body":"play now"
    		},
    		"data" : {
-   			"url" : "https://example.com/"
+   			"url" : "https://example.com/",
+   			"message_id" : "a1b2c3d4-e5f6"
    		}
    	}
    }
@@ -115,3 +116,26 @@ nav_order: 4
 
 1. При наличии непустого `url` необходимо запустить в WebView ссылку указанную в данном параметре.
 1. **Эту ссылку не следует сохранять**. При следующем запуске должна запуститься ссылка, полученная из [запроса к конфигу]({{ '/ru/config-request/' | relative_url }}).
+
+#### Колбэк открытия уведомления
+
+При открытии приложения по клику на уведомление необходимо отправить колбэк на эндпоинт `interaction.php`. Эндпоинт расположен на том же домене, что и [запрос к конфигу]({{ '/ru/config-request/' | relative_url }}): если конфиг доступен по адресу `https://example.com/config.php`, колбэк отправляется на `https://example.com/interaction.php`.
+
+```json
+curl --request PUT \
+     --url 'https://example.com/interaction.php?message_id=a1b2c3d4-e5f6' \
+     --header 'content-type: application/json' \
+     --data '{"af_id": "1688042316289-7152592750959506765"}'
+```
+
+| Параметр | Где передаётся | Описание |
+|---|---|---|
+| message_id | Query-параметр | Значение ключа `message_id` из `data` в `payload` уведомления. Допустимы латинские буквы, цифры, `_` и `-`, длина до 128 символов |
+| af_id | Тело запроса (JSON) | AppsFlyer ID, тот же, что передаётся в [запросе к конфигу]({{ '/ru/config-request/' | relative_url }}). Не может быть пустым |
+
+Ответы эндпоинта с ошибкой:
+
+| Код | Причина |
+|---|---|
+| 400 (Bad Request) | `message_id` отсутствует или не соответствует формату, либо `af_id` пустой |
+| 405 (Method Not Allowed) | Использован метод, отличный от `PUT` |

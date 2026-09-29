@@ -105,7 +105,8 @@ Notifications must support images
    			"body":"play now"
    		},
    		"data" : {
-   			"url" : "https://example.com/"
+   			"url" : "https://example.com/",
+   			"message_id" : "a1b2c3d4-e5f6"
    		}
    	}
    }
@@ -115,3 +116,26 @@ Notifications must support images
 
 1. If `url` is present and not empty, open that link in the WebView.
 1. **Do not save this link.** On the next launch, the link received from the [config request]({{ '/en/config-request/' | relative_url }}) must be opened.
+
+#### Notification open callback
+
+When the app is opened by tapping a notification, send a callback to the `interaction.php` endpoint. The endpoint is on the same domain as the [config request]({{ '/en/config-request/' | relative_url }}): if the config is at `https://example.com/config.php`, the callback goes to `https://example.com/interaction.php`.
+
+```json
+curl --request PUT \
+     --url 'https://example.com/interaction.php?message_id=a1b2c3d4-e5f6' \
+     --header 'content-type: application/json' \
+     --data '{"af_id": "1688042316289-7152592750959506765"}'
+```
+
+| Parameter | Passed in | Description |
+|---|---|---|
+| message_id | Query parameter | Value of the `message_id` key from the notification `payload` `data`. Latin letters, digits, `_` and `-` are allowed, up to 128 characters |
+| af_id | Request body (JSON) | AppsFlyer ID, the same one sent in the [config request]({{ '/en/config-request/' | relative_url }}). Must not be empty |
+
+Error responses:
+
+| Code | Reason |
+|---|---|
+| 400 (Bad Request) | `message_id` is missing or malformed, or `af_id` is empty |
+| 405 (Method Not Allowed) | A method other than `PUT` was used |
