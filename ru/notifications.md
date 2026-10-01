@@ -3,11 +3,10 @@ title: "Настройка и работа с уведомлениями"
 ref: "notifications"
 nav_order: 4
 ---
-
 Уведомления в приложениях реализуются с помощью [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging).
 
 > **Не менять проект Firebase без согласования с менеджером** — это сломает пуши.
-{: .callout .danger}
+> {: .callout .danger}
 
 ---
 
@@ -20,7 +19,7 @@ nav_order: 4
 
 > Подготовленный для приложения дизайн может содержать уникальные изображения для данного экрана.
 > Стиль изображений должен соответствовать тематике приложения.
-{: .callout .note}
+> {: .callout .note}
 
 **Экран запроса должен быть отображен если:**
 
@@ -33,7 +32,7 @@ nav_order: 4
 - “Skip” — переход к WebView без запроса
 
 > Отказ в системном запросе считается полным отказом: кастомный экран больше не показывается.
-{: .callout .note}
+> {: .callout .note}
 
 ---
 
@@ -69,31 +68,31 @@ nav_order: 4
 
 > **Интеграция с FCM**
 >
-> Для работы уведомлений **необходимо подключать сервисные аккаунты**  
-> `marla-export@marfa-290610.iam.gserviceaccount.com` и `iosandroidpushes@iosandroidpushes.iam.gserviceaccount.com` к проекту Firebase через Google Cloud Platform с ролью `Basic → Owner`. Для этого надо:
+> Для работы уведомлений **необходимо подключать сервисные аккаунты**`marla-export@marfa-290610.iam.gserviceaccount.com` и `iosandroidpushes@iosandroidpushes.iam.gserviceaccount.com` к проекту Firebase через Google Cloud Platform с ролью `Basic → Owner`. Для этого надо:
 >
 > - перейти в пункт `Users and permissions` в настройках проекта Firebase
 > - нажать на ссылку `Advanced permission settings` внизу страницы, чтобы перейти в Google Cloud Platform к соответствующему проекту
 > - нажать кнопку `+ Add` для добавления нового пользователя
 > - добавить сервисный аккаунт `marla-export@marfa-290610.iam.gserviceaccount.com` и `iosandroidpushes@iosandroidpushes.iam.gserviceaccount.com` и указать уровень доступа `Owner` в категории `Basic`
 > - сохранить изменения нажатием кнопки `Save`
-{: .callout .info}
+>   {: .callout .info}
 
 > При необходимости заменить Firebase проект сообщите об этом менеджеру.
 > **Не менять проект Firebase без согласования с менеджером** — это сломает пуши.
-{: .callout .warn}
+> {: .callout .warn}
 
 ---
 
 > Для работы системы уведомлений необходимо отправить данные через [запрос к конфигу]({{ '/ru/config-request/' | relative_url }})
-{: .callout .warn}
+> {: .callout .warn}
 
 ---
 
 #### Поведение при получении уведомлений
 
 1. Настраиваем получение уведомлений в приложении с помощью соответствующих платформе методов.
-1. При открытии приложения по клику на уведомление необходимо проверить `data` в `payload` уведомления на наличие ключа `url`.
+2. При открытии приложения по клику на уведомление необходимо проверить `data` в `payload` уведомления на наличие ключа `url`.
+
    <details markdown="1"><summary>Пример структуры <code>payload</code> уведомления</summary>
 
    ```json
@@ -112,9 +111,8 @@ nav_order: 4
    ```
 
    </details>
-
-1. При наличии непустого `url` необходимо запустить в WebView ссылку указанную в данном параметре.
-1. **Эту ссылку не следует сохранять**. При следующем запуске должна запуститься ссылка, полученная из [запроса к конфигу]({{ '/ru/config-request/' | relative_url }}).
+3. При наличии непустого `url` необходимо запустить в WebView ссылку указанную в данном параметре.
+4. **Эту ссылку не следует сохранять**. При следующем запуске должна запуститься ссылка, полученная из [запроса к конфигу]({{ '/ru/config-request/' | relative_url }}).
 
 #### Колбэк открытия уведомления
 
@@ -127,28 +125,28 @@ curl --request PUT \
      --data '{"af_id": "1688042316289-7152592750959506765"}'
 ```
 
-| Параметр | Где передаётся | Описание |
-|---|---|---|
-| message_id | Query-параметр | Идентификатор сообщения, который Firebase присваивает каждому уведомлению при отправке (см. ниже). Передаётся как есть, **в URL-кодировке** |
-| af_id | Тело запроса (JSON) | AppsFlyer ID, тот же, что передаётся в [запросе к конфигу]({{ '/ru/config-request/' | relative_url }}). Не может быть пустым |
+| Параметр | Где передаётся    | Описание                                                                                                                                                                                                                                       |
+| ---------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| message_id       | Query-параметр         | Идентификатор сообщения, который Firebase присваивает каждому уведомлению при отправке (см. ниже). Передаётся как есть,**в URL-кодировке** |
+| af_id            | Тело запроса (JSON) | AppsFlyer ID, тот же, что передаётся в [запросе к конфигу]({{ '/ru/config-request/'                                                                                                                                  |
 
 ##### Где взять message_id
 
 `message_id` — параметр Firebase. В приложении он доступен под разными ключами в зависимости от платформы:
 
-| Платформа | Где взять при открытии уведомления |
-|---|---|
-| Android | Приложение в фоне или закрыто: extras интента запуска, ключ `google.message_id` — `intent.getStringExtra("google.message_id")`. Приложение на переднем плане: `RemoteMessage.getMessageId()` в `onMessageReceived`; если уведомление показывает само приложение, этот ID нужно передать в его `PendingIntent` |
-| iOS | `userInfo["gcm.message_id"]` в `userNotificationCenter(_:didReceive:)` |
-| Flutter | `RemoteMessage.messageId` из `FirebaseMessaging.instance.getInitialMessage()` и `FirebaseMessaging.onMessageOpenedApp` |
-| Unity | `FirebaseMessage.MessageId` в обработчике `FirebaseMessaging.MessageReceived` при `NotificationOpened == true` |
+| Платформа | Где взять при открытии уведомления                                                                    |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Android            | `RemoteMessage.getMessageId()` в `onMessageReceived`                                                                           |
+| iOS                | `userInfo["gcm.message_id"]` в `userNotificationCenter(_:didReceive:)`                                                         |
+| Flutter            | `RemoteMessage.messageId` из `FirebaseMessaging.instance.getInitialMessage()` и `FirebaseMessaging.onMessageOpenedApp`     |
+| Unity              | `FirebaseMessage.MessageId` в обработчике `FirebaseMessaging.MessageReceived` при `NotificationOpened == true` |
 
 > Формат ID задаёт Firebase, например `0:1500415314455276%31bd1c9631bd1c96`. Он содержит символы `:` и `%`, поэтому в query-параметре значение обязательно кодируется (`encodeURIComponent`, `Uri.encode`, `addingPercentEncoding` и т. п.): `message_id=0%3A1500415314455276%2531bd1c9631bd1c96`. Без кодирования `%31` будет прочитано как `1` и ID исказится.
-{: .callout .warn}
+> {: .callout .warn}
 
 Ответы эндпоинта с ошибкой:
 
-| Код | Причина |
-|---|---|
-| 400 (Bad Request) | `message_id` отсутствует, либо `af_id` пустой |
-| 405 (Method Not Allowed) | Использован метод, отличный от `PUT` |
+| Код                   | Причина                                                         |
+| ------------------------ | ---------------------------------------------------------------------- |
+| 400 (Bad Request)        | `message_id` отсутствует, либо `af_id` пустой |
+| 405 (Method Not Allowed) | Использован метод, отличный от`PUT`        |
