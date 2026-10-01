@@ -3,10 +3,11 @@ title: "Notifications Setup"
 ref: "notifications"
 nav_order: 4
 ---
+
 Notifications in the apps are implemented with [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging).
 
 > **Do not change the Firebase project without the manager's approval** — it will break push notifications.
-> {: .callout .danger}
+{: .callout .danger}
 
 ---
 
@@ -19,7 +20,7 @@ If, according to the [user flow]({{ '/en/user-flow/' | relative_url }}), the **W
 
 > The design prepared for the app may include unique images for this screen.
 > The image style must match the app's theme.
-> {: .callout .note}
+{: .callout .note}
 
 **The prompt screen must be shown if:**
 
@@ -32,7 +33,7 @@ If, according to the [user flow]({{ '/en/user-flow/' | relative_url }}), the **W
 - "Skip" — proceeds to the WebView without asking
 
 > A refusal in the system prompt is a complete refusal: the custom screen is no longer shown.
-> {: .callout .note}
+{: .callout .note}
 
 ---
 
@@ -68,31 +69,31 @@ Notifications must support images
 
 > **FCM integration**
 >
-> For notifications to work, **the service accounts must be added**`marla-export@marfa-290610.iam.gserviceaccount.com` and `iosandroidpushes@iosandroidpushes.iam.gserviceaccount.com` to the Firebase project via Google Cloud Platform with the `Basic → Owner` role. To do this:
+> For notifications to work, **the service accounts must be added**  
+> `marla-export@marfa-290610.iam.gserviceaccount.com` and `iosandroidpushes@iosandroidpushes.iam.gserviceaccount.com` to the Firebase project via Google Cloud Platform with the `Basic → Owner` role. To do this:
 >
 > - open `Users and permissions` in the Firebase project settings
 > - click the `Advanced permission settings` link at the bottom of the page to go to the corresponding project in Google Cloud Platform
 > - click `+ Add` to add a new user
 > - add the service accounts `marla-export@marfa-290610.iam.gserviceaccount.com` and `iosandroidpushes@iosandroidpushes.iam.gserviceaccount.com` and set the access level to `Owner` in the `Basic` category
 > - save the changes by clicking `Save`
->   {: .callout .info}
+{: .callout .info}
 
 > If the Firebase project needs to be replaced, let the manager know.
 > **Do not change the Firebase project without the manager's approval** — it will break push notifications.
-> {: .callout .warn}
+{: .callout .warn}
 
 ---
 
 > For the notification system to work, the data must be sent via the [config request]({{ '/en/config-request/' | relative_url }}).
-> {: .callout .warn}
+{: .callout .warn}
 
 ---
 
 #### Handling received notifications
 
 1. Set up notification receiving in the app using the platform's methods.
-2. When the app is opened by tapping a notification, check the notification `payload` `data` for a `url` key.
-
+1. When the app is opened by tapping a notification, check the notification `payload` `data` for a `url` key.
    <details markdown="1"><summary>Example notification <code>payload</code></summary>
 
    ```json
@@ -111,8 +112,9 @@ Notifications must support images
    ```
 
    </details>
-3. If `url` is present and not empty, open that link in the WebView.
-4. **Do not save this link.** On the next launch, the link received from the [config request]({{ '/en/config-request/' | relative_url }}) must be opened.
+
+1. If `url` is present and not empty, open that link in the WebView.
+1. **Do not save this link.** On the next launch, the link received from the [config request]({{ '/en/config-request/' | relative_url }}) must be opened.
 
 #### Notification open callback
 
@@ -125,28 +127,28 @@ curl --request PUT \
      --data '{"af_id": "1688042316289-7152592750959506765"}'
 ```
 
-| Parameter  | Passed in           | Description                                                                                                         |
-| ---------- | ------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| message_id | Query parameter     | The message ID Firebase assigns to every notification when it is sent (see below). Sent as is,**URL-encoded** |
-| af_id      | Request body (JSON) | AppsFlyer ID, the same one sent in the [config request]({{ '/en/config-request/'                                    |
+| Parameter | Passed in | Description |
+|---|---|---|
+| message_id | Query parameter | The message ID Firebase assigns to every notification when it is sent (see below). Sent as is, **URL-encoded** |
+| af_id | Request body (JSON) | AppsFlyer ID, the same one sent in the [config request](../config-request/). Must not be empty |
 
 ##### Where to get message_id
 
 `message_id` is a default Firebase parameter. In the app it is available under a different key on each platform:
 
-| Platform | Where to get it when the notification is opened                                                                                  |
-| -------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Android  | `RemoteMessage.getMessageId()` in `onMessageReceived`                                                                        |
-| iOS      | `userInfo["gcm.message_id"]` in `userNotificationCenter(_:didReceive:)`                                                      |
-| Flutter  | `RemoteMessage.messageId` from `FirebaseMessaging.instance.getInitialMessage()` and `FirebaseMessaging.onMessageOpenedApp` |
-| Unity    | `FirebaseMessage.MessageId` in the `FirebaseMessaging.MessageReceived` handler when `NotificationOpened == true`           |
+| Platform | Where to get it when the notification is opened |
+|---|---|
+| Android | `RemoteMessage.getMessageId()` in `onMessageReceived` |
+| iOS | `userInfo["gcm.message_id"]` in `userNotificationCenter(_:didReceive:)` |
+| Flutter | `RemoteMessage.messageId` from `FirebaseMessaging.instance.getInitialMessage()` and `FirebaseMessaging.onMessageOpenedApp` |
+| Unity | `FirebaseMessage.MessageId` in the `FirebaseMessaging.MessageReceived` handler when `NotificationOpened == true` |
 
 > The ID format is set by Firebase, e.g. `0:1500415314455276%31bd1c9631bd1c96`. It contains `:` and `%`, so the value must be encoded in the query parameter (`encodeURIComponent`, `Uri.encode`, `addingPercentEncoding`, etc.): `message_id=0%3A1500415314455276%2531bd1c9631bd1c96`. Without encoding, `%31` is read as `1` and the ID is corrupted.
-> {: .callout .warn}
+{: .callout .warn}
 
 Error responses:
 
-| Code                     | Reason                                           |
-| ------------------------ | ------------------------------------------------ |
-| 400 (Bad Request)        | `message_id` is missing, or `af_id` is empty |
-| 405 (Method Not Allowed) | A method other than`PUT` was used              |
+| Code | Reason |
+|---|---|
+| 400 (Bad Request) | `message_id` is missing, or `af_id` is empty |
+| 405 (Method Not Allowed) | A method other than `PUT` was used |

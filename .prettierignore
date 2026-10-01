@@ -1,0 +1,4 @@
+# Wiki pages use kramdown/Liquid syntax ({: .callout} after quotes, {{ … | relative_url }}) that Prettier rewrites and breaks the GitHub Pages build.
+*.md
+_layouts/
+_includes/
