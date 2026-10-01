@@ -105,8 +105,7 @@ nav_order: 4
    			"body":"play now"
    		},
    		"data" : {
-   			"url" : "https://example.com/",
-   			"message_id" : "a1b2c3d4-e5f6"
+   			"url" : "https://example.com/"
    		}
    	}
    }
@@ -123,19 +122,33 @@ nav_order: 4
 
 ```json
 curl --request PUT \
-     --url 'https://example.com/interaction.php?message_id=a1b2c3d4-e5f6' \
+     --url 'https://example.com/interaction.php?message_id=0%3A1500415314455276%2531bd1c9631bd1c96' \
      --header 'content-type: application/json' \
      --data '{"af_id": "1688042316289-7152592750959506765"}'
 ```
 
 | Параметр | Где передаётся | Описание |
 |---|---|---|
-| message_id | Query-параметр | Значение ключа `message_id` из `data` в `payload` уведомления. Допустимы латинские буквы, цифры, `_` и `-`, длина до 128 символов |
+| message_id | Query-параметр | Идентификатор сообщения, который Firebase присваивает каждому уведомлению при отправке (см. ниже). Передаётся как есть, **в URL-кодировке** |
 | af_id | Тело запроса (JSON) | AppsFlyer ID, тот же, что передаётся в [запросе к конфигу]({{ '/ru/config-request/' | relative_url }}). Не может быть пустым |
+
+##### Где взять message_id
+
+`message_id` — параметр Firebase. В приложении он доступен под разными ключами в зависимости от платформы:
+
+| Платформа | Где взять при открытии уведомления |
+|---|---|
+| Android | Приложение в фоне или закрыто: extras интента запуска, ключ `google.message_id` — `intent.getStringExtra("google.message_id")`. Приложение на переднем плане: `RemoteMessage.getMessageId()` в `onMessageReceived`; если уведомление показывает само приложение, этот ID нужно передать в его `PendingIntent` |
+| iOS | `userInfo["gcm.message_id"]` в `userNotificationCenter(_:didReceive:)` |
+| Flutter | `RemoteMessage.messageId` из `FirebaseMessaging.instance.getInitialMessage()` и `FirebaseMessaging.onMessageOpenedApp` |
+| Unity | `FirebaseMessage.MessageId` в обработчике `FirebaseMessaging.MessageReceived` при `NotificationOpened == true` |
+
+> Формат ID задаёт Firebase, например `0:1500415314455276%31bd1c9631bd1c96`. Он содержит символы `:` и `%`, поэтому в query-параметре значение обязательно кодируется (`encodeURIComponent`, `Uri.encode`, `addingPercentEncoding` и т. п.): `message_id=0%3A1500415314455276%2531bd1c9631bd1c96`. Без кодирования `%31` будет прочитано как `1` и ID исказится.
+{: .callout .warn}
 
 Ответы эндпоинта с ошибкой:
 
 | Код | Причина |
 |---|---|
-| 400 (Bad Request) | `message_id` отсутствует или не соответствует формату, либо `af_id` пустой |
+| 400 (Bad Request) | `message_id` отсутствует, либо `af_id` пустой |
 | 405 (Method Not Allowed) | Использован метод, отличный от `PUT` |

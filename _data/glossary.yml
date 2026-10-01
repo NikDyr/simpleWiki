@@ -113,6 +113,11 @@ ru:
     match: ['кастомн\p{L}* экран\p{L}*']
     summary: Собственный экран приложения с предложением получать уведомления, предшествующий системному запросу разрешения.
     ref: notifications
+  - term: message_id
+    match: ['google\.message_id', 'gcm\.message_id']
+    code: [message_id, google.message_id, gcm.message_id]
+    summary: Идентификатор сообщения, который Firebase присваивает каждому уведомлению при отправке.
+    ref: notifications
   - term: Payload уведомления
     match: ['payload']
     code: [payload]
@@ -260,6 +265,11 @@ en:
   - term: Custom notification prompt screen
     match: ['custom (?:prompt )?screen']
     summary: The app's own screen offering notifications, shown before the system permission prompt.
+    ref: notifications
+  - term: message_id
+    match: ['google\.message_id', 'gcm\.message_id']
+    code: [message_id, google.message_id, gcm.message_id]
+    summary: The message ID Firebase assigns to every notification when it is sent.
     ref: notifications
   - term: Notification payload
     match: ['payload']

@@ -105,8 +105,7 @@ Notifications must support images
    			"body":"play now"
    		},
    		"data" : {
-   			"url" : "https://example.com/",
-   			"message_id" : "a1b2c3d4-e5f6"
+   			"url" : "https://example.com/"
    		}
    	}
    }
@@ -123,19 +122,33 @@ When the app is opened by tapping a notification, send a callback to the `intera
 
 ```json
 curl --request PUT \
-     --url 'https://example.com/interaction.php?message_id=a1b2c3d4-e5f6' \
+     --url 'https://example.com/interaction.php?message_id=0%3A1500415314455276%2531bd1c9631bd1c96' \
      --header 'content-type: application/json' \
      --data '{"af_id": "1688042316289-7152592750959506765"}'
 ```
 
 | Parameter | Passed in | Description |
 |---|---|---|
-| message_id | Query parameter | Value of the `message_id` key from the notification `payload` `data`. Latin letters, digits, `_` and `-` are allowed, up to 128 characters |
+| message_id | Query parameter | The message ID Firebase assigns to every notification when it is sent (see below). Sent as is, **URL-encoded** |
 | af_id | Request body (JSON) | AppsFlyer ID, the same one sent in the [config request]({{ '/en/config-request/' | relative_url }}). Must not be empty |
+
+##### Where to get message_id
+
+`message_id` is a default Firebase parameter. In the app it is available under a different key on each platform:
+
+| Platform | Where to get it when the notification is opened |
+|---|---|
+| Android | App in the background or closed: launch intent extras, key `google.message_id` — `intent.getStringExtra("google.message_id")`. App in the foreground: `RemoteMessage.getMessageId()` in `onMessageReceived`; if the app shows the notification itself, pass this ID into its `PendingIntent` |
+| iOS | `userInfo["gcm.message_id"]` in `userNotificationCenter(_:didReceive:)` |
+| Flutter | `RemoteMessage.messageId` from `FirebaseMessaging.instance.getInitialMessage()` and `FirebaseMessaging.onMessageOpenedApp` |
+| Unity | `FirebaseMessage.MessageId` in the `FirebaseMessaging.MessageReceived` handler when `NotificationOpened == true` |
+
+> The ID format is set by Firebase, e.g. `0:1500415314455276%31bd1c9631bd1c96`. It contains `:` and `%`, so the value must be encoded in the query parameter (`encodeURIComponent`, `Uri.encode`, `addingPercentEncoding`, etc.): `message_id=0%3A1500415314455276%2531bd1c9631bd1c96`. Without encoding, `%31` is read as `1` and the ID is corrupted.
+{: .callout .warn}
 
 Error responses:
 
 | Code | Reason |
 |---|---|
-| 400 (Bad Request) | `message_id` is missing or malformed, or `af_id` is empty |
+| 400 (Bad Request) | `message_id` is missing, or `af_id` is empty |
 | 405 (Method Not Allowed) | A method other than `PUT` was used |
